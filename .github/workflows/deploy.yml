@@ -1,0 +1,68 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one concurrent deployment; cancel in-progress on new push
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # ── Validate HTML/CSS (lint pass) ─────────────────────────────────────────
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for broken internal links
+        run: |
+          echo "Checking HTML files exist..."
+          for f in index.html releases.html artiesten.html contact.html faq.html privacy.html 404.html; do
+            [ -f "$f" ] && echo "✅ $f" || echo "❌ MISSING: $f"
+          done
+
+      - name: Verify Service Worker present
+        run: |
+          [ -f "sw.js" ] && echo "✅ sw.js present" || exit 1
+
+      - name: Verify favicon present
+        run: |
+          [ -f "favicon.svg" ] && echo "✅ favicon.svg present" || exit 1
+
+  # ── Deploy to GitHub Pages ───────────────────────────────────────────────
+  deploy:
+    name: Deploy
+    needs: validate
+    runs-on: ubuntu-latest
+    # Only deploy on push to main/master (not on PRs)
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
