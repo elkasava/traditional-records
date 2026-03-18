@@ -1,0 +1,13 @@
+# Normalize line endings to LF on commit
+* text=auto eol=lf
+
+# Binary — no conversions
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.svg  binary
+*.ico  binary
+*.pdf  binary
+*.woff2 binary
+*.ttf  binary

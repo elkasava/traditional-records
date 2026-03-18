@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Veelgestelde vragen over Traditional Records - Bestellingen, verzending, retourneren, licensing en meer.">
+    <title>FAQ | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <style>
+        .faq-hero {
+            background: #000;
+            padding: 160px 5% 80px;
+            border-bottom: 1px solid #1a1a1a;
+            text-align: center;
+        }
+        .faq-hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            color: #fff;
+            margin: 0;
+            letter-spacing: -0.04em;
+        }
+
+        .faq-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+
+        .faq-category {
+            margin-bottom: 60px;
+        }
+        .faq-category-title {
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #fff;
+            font-family: var(--font-main);
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+            padding: 25px 40px 25px 0;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+            line-height: 1.4;
+        }
+        .faq-question:hover {
+            color: var(--color-accent);
+        }
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 22px;
+            font-weight: 300;
+            color: #555;
+            transition: transform 0.3s, color 0.3s;
+        }
+        .faq-item.open .faq-question::after {
+            content: '\2212';
+            color: var(--color-accent);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding-bottom: 25px;
+        }
+        .faq-answer p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0;
+        }
+        .faq-answer a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+
+        .faq-cta {
+            text-align: center;
+            padding: 60px 5%;
+            border-top: 1px solid #1a1a1a;
+        }
+        .faq-cta p {
+            color: #888;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar scrolled" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target"><img src="logo.png" alt="Traditional Records Logo" width="50" height="50"></a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+        <div class="nav-actions">
+            <button id="openCartBtn" class="icon-link cart-link hover-target" aria-label="Winkelwagen openen" type="button">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span id="cartCountBadge" class="cart-count" aria-live="polite">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <div class="faq-hero">
+            <h1>FAQ</h1>
+        </div>
+
+        <div class="faq-content">
+
+            <div class="faq-category">
+                <h2 class="faq-category-title">BESTELLINGEN & VERZENDING</h2>
+
+                <div class="faq-item">
+                    <button class="faq-question hover-target" type="button">Hoe lang duurt de verzending?</button>
+                    <div class="faq-answer">
+                        <p>Bestellingen binnen Nederland worden doorgaans binnen 2-4 werkdagen bezorgd. Verzending naar Europa duurt 5-10 werkdagen. Wereldwijde verzending kan 10-21 werkdagen duren, afhankelijk van de bestemming en douane-afhandeling.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question hover-target" type="button">Wat zijn de verzendkosten?</button>
+                    <div class="faq-answer">
+                        <p>Nederland: &euro;4,95 (gratis bij bestellingen boven &euro;50). Europa: &euro;9,95. Rest van de wereld: &euro;14,95. Vinyl wordt altijd zorgvuldig verpakt in stevige mailers om schade te voorkomen.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question hover-target" type="button">Kan ik mijn bestelling volgen?</button>
+                    <div class="faq-answer">
+                        <p>Ja, zodra je bestelling is verzonden ontvang je een e-mail met een track & trace code. Hiermee kun je de status van je pakket realtime volgen.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question hover-target" type="button">Welke betaalmethoden accepteren jullie?</button>
+                    <div class="faq-answer">
+                        <p>Wij accepteren iDEAL, creditcard (Visa, Mastercard), PayPal, Bancontact en bankoverschrijving. Alle betalingen worden veilig verwerkt.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h2 class="faq-category-title">PRODUCTEN</h2>
+
+                <div class="faq-item">
+                    <button class="faq-question hover-target" type="button">Zijn jullie vinyl platen nieuw geperst?</button>
+                    <div class="faq-answer">
+                        <p>Ja, al onze vinyl releases zijn nieuw geperst op 180-gram vinyl van de hoogste kwaliteit. De audio is professioneel geremasterd van de originele masterbanden voor de best mogelijke geluidskwaliteit.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question hover-target" type="button">Bieden jullie ook digitale downloads aan?</button>
+                    <div class="faq-answer">
+                        <p>Onze catalogus is beschikbaar op alle grote streamingplatforms waaronder Spotify, Apple Music, Deezer en YouTube Music. Sommige releases bevatten ook een downloadcode bij de fysieke aankoop.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question hover-target" type="button">Kan ik retourneren?</button>
+                    <div class="faq-answer">
+                        <p>Ongeopende producten kunnen binnen 14 dagen na ontvangst worden geretourneerd. Vinyl en CD's die geopend zijn kunnen alleen worden geretourneerd bij een defect. Neem contact op via <a href="mailto:support@traditionalrecords.sr">support@traditionalrecords.sr</a> voor een retourverzoek.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h2 class="faq-category-title">SYNC & LICENSING</h2>
+
+                <div class="faq-item">
+                    <button class="faq-question hover-target" type="button">Hoe kan ik muziek licenti&euml;ren voor mijn project?</button>
+                    <div class="faq-answer">
+                        <p>Neem contact op met onze licensing afdeling via <a href="mailto:sync@traditionalrecords.sr">sync@traditionalrecords.sr</a>. Vermeld het type project (film, reclame, podcast, etc.), de gewenste track(s), het gebruiksgebied en de looptijd. Wij sturen je binnen 5 werkdagen een offerte.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question hover-target" type="button">Bieden jullie blanket licenses aan?</button>
+                    <div class="faq-answer">
+                        <p>Ja, voor productiehuizen en mediabedrijven bieden wij aantrekkelijke blanket licenses aan voor onze volledige catalogus. Neem contact op voor een op maat gemaakte offerte.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h2 class="faq-category-title">ARTIESTEN & DEMO'S</h2>
+
+                <div class="faq-item">
+                    <button class="faq-question hover-target" type="button">Hoe kan ik mijn muziek insturen?</button>
+                    <div class="faq-answer">
+                        <p>Stuur je demo, EPK of links naar je muziek naar <a href="mailto:ar@traditionalrecords.sr">ar@traditionalrecords.sr</a>. Wij zijn met name ge&iuml;nteresseerd in Surinaamse genres zoals Kaseko, Kawina, Winti, Banja en aanverwante stijlen. We luisteren naar alle inzendingen en reageren als er een match is.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question hover-target" type="button">Werken jullie ook met internationale artiesten?</button>
+                    <div class="faq-answer">
+                        <p>Ja, wij staan open voor samenwerkingen met artiesten wereldwijd, mits er een duidelijke connectie is met de Surinaamse muzikale traditie. Cross-culturele projecten die bruggen bouwen tussen genres zijn bijzonder welkom.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-cta">
+            <p>Staat je vraag er niet bij? Neem gerust contact met ons op.</p>
+            <a href="contact.html" class="action-btn hover-target" style="display:inline-flex;">CONTACT OPNEMEN</a>
+        </div>
+    </main>
+
+    <div id="cartModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Winkelwagen">
+        <div class="modal-content cart-content">
+            <div class="cart-title">WINKELWAGEN <button class="close-modal close-cart hover-target" aria-label="Sluiten" type="button">&times;</button></div>
+            <div id="cartItemsContainer" class="cart-items-container"></div>
+            <div class="cart-footer">
+                <div class="cart-total-row"><span>TOTAAL</span><span id="cartTotalPrice" aria-live="polite">&euro;0.00</span></div>
+                <button class="action-btn checkout-btn hover-target" type="button">AFREKENEN</button>
+                <button class="continue-btn hover-target" id="continueShopping" type="button">VERDER WINKELEN</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-col brand-col">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="120" height="120">
+                <address>TRADITIONAL RECORDS HQ<br>Waterkant 12, Paramaribo<br><a href="mailto:info@traditionalrecords.sr" class="hover-target">info@traditionalrecords.sr</a></address>
+                <div class="social-icons">
+                    <a href="https://instagram.com/traditionalrecords" target="_blank" rel="noopener" class="hover-target" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://open.spotify.com/search/Traditional%20Records%20Suriname" target="_blank" rel="noopener" class="hover-target" aria-label="Spotify"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8 11.5c5-2 8.5-1 9.5-.5"></path><path d="M7.5 14.5c5-2 8.5-1 9.5-.5"></path><path d="M7 17.5c5-2 8.5-1 9.5-.5"></path></svg></a>
+                    <a href="https://facebook.com/traditionalrecords" target="_blank" rel="noopener" class="hover-target" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                </div>
+            </div>
+            <div class="footer-col newsletter-col">
+                <h3>THE NEWSLETTER</h3>
+                <p>Join the inner circle.</p>
+                <form class="newsletter-form" aria-label="Nieuwsbrief aanmelding">
+                    <label for="newsletter-email-faq" class="sr-only">E-mailadres</label>
+                    <input type="email" id="newsletter-email-faq" placeholder="EMAIL ADDRESS" required autocomplete="email">
+                    <button type="submit" class="hover-target">SUBSCRIBE</button>
+                </form>
+            </div>
+            <div class="footer-col links-col">
+                <h3>VERKENNEN</h3>
+                <ul class="footer-links">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="merch.html" class="hover-target">Merch</a></li>
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="magazine.html" class="hover-target">Magazine</a></li>
+                    <li><a href="poku-lobi-club.html" class="hover-target">Poku Lobi Club</a></li>
+                    <li><a href="sync.html" class="hover-target">Sync & Licensing</a></li>
+                    <li><a href="contact.html" class="hover-target">Contact</a></li>
+                </ul>
+                <ul class="footer-links" style="margin-top: 15px;">
+                    <li><a href="faq.html" class="hover-target" style="font-size:12px; font-weight:400;">FAQ</a></li>
+                    <li><a href="privacy.html" class="hover-target" style="font-size:12px; font-weight:400;">Privacy & Voorwaarden</a></li>
+                </ul>
+                <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.parentElement;
+            const wasOpen = item.classList.contains('open');
+            // Close all others
+            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!wasOpen) item.classList.add('open');
+        });
+    });
+    </script>
+</body>
+</html>

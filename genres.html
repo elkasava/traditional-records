@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Het cultureel archief van Surinaamse muziek — Kaseko, Kawina, Winti, Banja, Aleke, Zouk, Gospel. Traditional Records documenteert het erfgoed.">
+    <title>GENRE ARCHIEF | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <style>
+        .archive-hero {
+            padding: 160px 6% 80px;
+            border-bottom: 1px solid #111;
+        }
+        .archive-hero-label {
+            font-size: 9px;
+            letter-spacing: 4px;
+            color: var(--color-accent);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .archive-hero h1 {
+            font-size: clamp(3rem, 9vw, 8rem);
+            font-weight: 800;
+            line-height: 0.88;
+            letter-spacing: -0.04em;
+            margin: 0 0 24px;
+        }
+        .archive-hero h1 em {
+            display: block;
+            font-style: italic;
+            font-weight: 200;
+            color: #666;
+            font-size: 0.45em;
+        }
+        .archive-hero-sub {
+            font-size: 16px;
+            color: #888;
+            max-width: 560px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ---- GENRE NAV ---- */
+        .genre-nav {
+            display: flex;
+            gap: 2px;
+            flex-wrap: wrap;
+            padding: 40px 6%;
+            border-bottom: 1px solid #111;
+        }
+        .genre-nav-btn {
+            padding: 10px 20px;
+            font-family: var(--font-main);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid #1a1a1a;
+            background: var(--color-card);
+            color: var(--color-muted);
+            cursor: none;
+            transition: all 0.2s;
+        }
+        .genre-nav-btn:hover, .genre-nav-btn.active {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+            background: rgba(255,68,0,0.05);
+        }
+
+        /* ---- GENRE CARDS ---- */
+        .genres-grid {
+            display: grid;
+            gap: 2px;
+        }
+
+        .genre-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid #111;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        .genre-card:hover { border-color: #2a2a2a; }
+        .genre-card:nth-child(even) { direction: rtl; }
+        .genre-card:nth-child(even) > * { direction: ltr; }
+
+        .genre-card-info {
+            padding: 60px 6%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .genre-card-tag {
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: var(--color-accent);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .genre-card-name {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            margin: 0 0 24px;
+        }
+        .genre-card-desc {
+            font-size: 15px;
+            color: #999;
+            line-height: 1.75;
+            font-weight: 300;
+            max-width: 460px;
+            margin: 0 0 32px;
+        }
+        .genre-card-meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .genre-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .genre-meta-label {
+            font-size: 8px;
+            letter-spacing: 2px;
+            color: #444;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .genre-meta-value {
+            font-size: 12px;
+            color: #888;
+        }
+        .genre-card-releases-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            text-decoration: none;
+            margin-top: 32px;
+            transition: gap 0.2s;
+        }
+        .genre-card-releases-link:hover { gap: 14px; }
+
+        .genre-card-visual {
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        .genre-card-visual-text {
+            font-size: clamp(6rem, 14vw, 16rem);
+            font-weight: 800;
+            letter-spacing: -0.06em;
+            color: #111;
+            line-height: 1;
+            user-select: none;
+            transition: color 0.3s;
+        }
+        .genre-card:hover .genre-card-visual-text { color: #161616; }
+        .genre-card-releases-count {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: #333;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 900px) {
+            .genre-card { grid-template-columns: 1fr; direction: ltr; }
+            .genre-card:nth-child(even) { direction: ltr; }
+            .genre-card-visual { min-height: 160px; }
+            .genre-card-info { padding: 40px 6%; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar scrolled" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target">
+                <img src="logo.png" alt="Traditional Records Logo" width="50" height="50">
+            </a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+        <div class="nav-actions">
+            <button id="openCartBtn" class="icon-link cart-link hover-target" aria-label="Winkelwagen openen" type="button">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span id="cartCountBadge" class="cart-count" aria-live="polite">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <div class="archive-hero">
+            <span class="archive-hero-label">Cultureel Archief</span>
+            <h1>GENRE<br><em>Encyclopedie</em></h1>
+            <p class="archive-hero-sub">Suriname herbergt een van de rijkste muzikale tradities ter wereld. Hier documenteren wij de genres, hun wortels, en de artiesten die ze levend houden.</p>
+        </div>
+
+        <nav class="genre-nav" aria-label="Filter op genre" id="genreNavBtns">
+            <button class="genre-nav-btn active hover-target" data-filter="all">Alles</button>
+            <button class="genre-nav-btn hover-target" data-filter="KASEKO">Kaseko</button>
+            <button class="genre-nav-btn hover-target" data-filter="KAWINA">Kawina</button>
+            <button class="genre-nav-btn hover-target" data-filter="WINTI">Winti</button>
+            <button class="genre-nav-btn hover-target" data-filter="DANCEHALL REGGAE">Dancehall &amp; Reggae</button>
+            <button class="genre-nav-btn hover-target" data-filter="GOSPEL">Gospel &amp; Bazijn</button>
+            <button class="genre-nav-btn hover-target" data-filter="ZOUK">Zouk</button>
+        </nav>
+
+        <div class="genres-grid" id="genresGrid">
+            <!-- filled by JS -->
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="60" height="60">
+                <p class="footer-tagline">Surinaamse erfgoedmuziek.<br>Wereldwijd gedeeld.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4 class="footer-links-title">Navigatie</h4>
+                <ul class="footer-links-list">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="genres.html" class="hover-target">Genre Archief</a></li>
+                    <li><a href="singles-club.html" class="hover-target">Singles Club</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+        </div>
+    </footer>
+
+    <script>
+    const GENRES = [
+        {
+            key: "KASEKO",
+            name: "KASEKO",
+            origin: "Suriname / Paramaribo",
+            era: "1940s – heden",
+            roots: "Afrikaans, Europees, Caraïbisch",
+            desc: "Kaseko is de meest herkenbare dansmuziek van Suriname. Geboren in de volkswijken van Paramaribo, versmelt het Afrikaanse polyritmes met Europese blaasinstrumenten en Caraïbische beats. De naam is afgeleid van het Franse 'Cassez le corps' — 'breek je lichaam'. Kaseko wordt gespeeld op feesten, begrafenissen en nationale vieringen, en vormt de muzikale ruggengraat van de Surinaamse Creoolse cultuur.",
+        },
+        {
+            key: "KAWINA",
+            name: "KAWINA",
+            origin: "Suriname / Javaanse gemeenschap",
+            era: "1930s – heden",
+            roots: "Javaans, Afro-Surinaams",
+            desc: "Kawina is de feestmuziek van de Surinaams-Javaanse gemeenschap, maar heeft zich door de decennia heen vermengd met Creoolse invloeden. Het kenmerkende geluid: snelle percussie, aanstekelijke zanglijnen en een dans-voor-je-leven ritme dat op bruiloften en dorpsfeesten niet mag ontbreken. Kawina is levend cultureel erfgoed.",
+        },
+        {
+            key: "WINTI",
+            name: "WINTI",
+            origin: "Suriname / Afro-Surinaams",
+            era: "17e eeuw – heden",
+            roots: "West-Afrikaans, Obia-tradities",
+            desc: "Winti is geen muziekgenre in de traditionele zin — het is een religie. De muziek is ritueel: het roept vooroudergeesten aan, eert goden (Winti's) en begeleidt spirituele ceremonies. De krachtige, repetitieve trommelpatronen en intonerende zang hebben diepe West-Afrikaanse wortels. In de moderne muziek heeft Winti een bredere invloed gekregen — artiesten als Stimofo brengen het rituele geluid naar een nieuw publiek.",
+        },
+        {
+            key: "DANCEHALL REGGAE",
+            name: "DANCEHALL",
+            origin: "Jamaica / Suriname",
+            era: "1980s – heden",
+            roots: "Jamaicaans Reggae, Dancehall",
+            desc: "Surinaamse dancehall en reggae zijn onlosmakelijk verbonden met de trans-Atlantische diaspora. Via de Surinaamse gemeenschap in Nederland reisde het geluid van Jamaica naar Paramaribo en weer terug. Artiesten als Faja Wowia, Ghetto Crew en Papa Touwtjie gaven het genre een uniek Surinaams accent — met Sranantongo teksten en lokale thema's.",
+        },
+        {
+            key: "GOSPEL",
+            name: "GOSPEL &\nBAZIJN",
+            origin: "Suriname / Christelijke gemeenschap",
+            era: "19e eeuw – heden",
+            roots: "Moravische zending, Afrikaans",
+            desc: "De Surinaamse gospelmuziek kent twee gezichten: de internationale gospelstijl met Engelse teksten, en het traditionele Bazijn — de Creoolse kerkmuziek die voortkomt uit de Moravische zending van de 18e en 19e eeuw. Bazijn combineert Europese koortradities met Afro-Surinaamse ritmes, en klinkt in kerken van Paramaribo tot Amsterdam.",
+        },
+        {
+            key: "ZOUK",
+            name: "ZOUK",
+            origin: "Frans-Caraïbisch / Suriname",
+            era: "1980s – heden",
+            roots: "Guadeloupe, Martinique, Braziliaans Lambada",
+            desc: "Zouk bereikte Suriname via de Caraïbische diaspora en vond er een warm onthaal. Het sensuelle geluid van Antilliaanse bands als Kassav inspireerde Surinaamse artiesten om het genre te adopteren en aan te passen. De Surinaamse zouk onderscheidt zich door zijn rustige tempo, romantische teksten en de invloed van de multiculturele Surinaamse samenleving.",
+        },
+    ];
+
+    function renderGenres(filter) {
+        const list = filter === 'all' ? GENRES : GENRES.filter(g => g.key === filter);
+        const grid = document.getElementById('genresGrid');
+        const db   = window.MOCK_DB;
+
+        grid.innerHTML = list.map(g => {
+            const count = db ? db.releases.filter(r => r.genre === g.key).length : 0;
+            const shortKey = g.key.split(' ')[0];
+            return `
+            <article class="genre-card reveal" data-genre="${g.key}">
+                <div class="genre-card-info">
+                    <p class="genre-card-tag">Surinaams erfgoed</p>
+                    <h2 class="genre-card-name">${g.name}</h2>
+                    <p class="genre-card-desc">${g.desc}</p>
+                    <div class="genre-card-meta">
+                        <div class="genre-meta-item">
+                            <span class="genre-meta-label">Herkomst</span>
+                            <span class="genre-meta-value">${g.origin}</span>
+                        </div>
+                        <div class="genre-meta-item">
+                            <span class="genre-meta-label">Era</span>
+                            <span class="genre-meta-value">${g.era}</span>
+                        </div>
+                        <div class="genre-meta-item">
+                            <span class="genre-meta-label">Wortels</span>
+                            <span class="genre-meta-value">${g.roots}</span>
+                        </div>
+                    </div>
+                    ${count > 0 ? `<a href="releases.html" class="genre-card-releases-link hover-target">
+                        Bekijk ${count} release${count !== 1 ? 's' : ''} →
+                    </a>` : ''}
+                </div>
+                <div class="genre-card-visual" aria-hidden="true">
+                    <span class="genre-card-visual-text">${shortKey}</span>
+                    ${count > 0 ? `<span class="genre-card-releases-count">${count} RELEASE${count !== 1 ? 'S' : ''}</span>` : ''}
+                </div>
+            </article>`;
+        }).join('');
+
+        // Re-init reveal observer for new cards
+        grid.querySelectorAll('.reveal').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                        e.target.style.opacity = '1';
+                        e.target.style.transform = 'none';
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            obs.observe(el);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Wait for MOCK_DB then render
+        const tryRender = () => {
+            renderGenres('all');
+        };
+        if (window.MOCK_DB) { tryRender(); }
+        else { setTimeout(tryRender, 500); }
+
+        // Filter buttons
+        document.getElementById('genreNavBtns')?.addEventListener('click', e => {
+            const btn = e.target.closest('.genre-nav-btn');
+            if (!btn) return;
+            document.querySelectorAll('.genre-nav-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderGenres(btn.dataset.filter);
+        });
+    });
+    </script>
+</body>
+</html>

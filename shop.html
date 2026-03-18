@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official Traditional Records Shop - Koop vinyl, CD's, merchandise en meer. Wereldwijde verzending.">
+    <title>SHOP | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar scrolled" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target"><img src="logo.png" alt="Traditional Records Logo" width="50" height="50"></a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target active">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+        <div class="nav-actions">
+            <button id="toggleSearchBtn" class="icon-link hover-target" aria-label="Zoekbalk openen" type="button">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+            <button id="openCartBtn" class="icon-link cart-link hover-target" aria-label="Winkelwagen openen" type="button">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span id="cartCountBadge" class="cart-count" aria-live="polite">0</span>
+            </button>
+        </div>
+        <div class="search-bar-container" id="searchContainer" role="search" aria-label="Zoek in catalogus">
+            <label for="searchInput" class="sr-only">Zoek artiest of titel</label>
+            <input type="search" id="searchInput" placeholder="ZOEK ARTIEST OF TITEL..." autocomplete="off">
+            <button id="closeSearch" class="close-search hover-target" aria-label="Zoekbalk sluiten" type="button">&times;</button>
+            <div id="searchResults" class="search-results" role="listbox" aria-label="Zoekresultaten"></div>
+        </div>
+    </nav>
+
+    <main id="main-content" class="page-container">
+        <h1 class="section-title">OFFICIAL SHOP</h1>
+
+        <h2 style="font-size: 11px; letter-spacing: 2px; color: #555; margin-bottom: 30px; text-transform: uppercase;">RELEASES</h2>
+        <div class="grid-layout" id="shopReleasesGrid">
+            <div class="loader" role="status">PRODUCTEN LADEN...</div>
+        </div>
+
+        <h2 style="font-size: 11px; letter-spacing: 2px; color: #555; margin: 60px 0 30px; text-transform: uppercase;">MERCHANDISE</h2>
+        <div class="grid-layout" id="shopMerchGrid">
+            <div class="loader" role="status">MERCH LADEN...</div>
+        </div>
+    </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const relGrid = document.getElementById('shopReleasesGrid');
+        const merchGrid = document.getElementById('shopMerchGrid');
+
+        const data = await (async () => {
+            for (let i = 0; i < 20; i++) {
+                if (window.MOCK_DB) return window.MOCK_DB;
+                await new Promise(r => setTimeout(r, 100));
+            }
+            return null;
+        })();
+
+        const fmt = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' });
+
+        if (relGrid && data?.releases) {
+            relGrid.innerHTML = data.releases.map(r => `
+                <article class="grid-item" data-product-id="${r.id}" tabindex="0" role="button" aria-label="${r.artist} - ${r.title} - ${fmt.format(r.price)}">
+                    ${r.scarcity ? `<span class="scarcity-badge">${r.scarcity}</span>` : ''}
+                    <div class="grid-img-wrapper">
+                        <img src="${r.img}" class="grid-img" alt="${r.artist} - ${r.title}" loading="lazy" width="280" height="280" onerror="this.src='cd-holder.jpg'">
+                    </div>
+                    <h3 class="artist-name">${r.artist}</h3>
+                    <p class="track-title">${r.title}</p>
+                    <p class="modal-price">${fmt.format(r.price)}</p>
+                </article>
+            `).join('');
+        }
+
+        if (merchGrid && data?.merch) {
+            merchGrid.innerHTML = data.merch.map(m => `
+                <article class="grid-item" data-product-id="${m.id}" tabindex="0" role="button" aria-label="${m.title} - ${fmt.format(m.price)}">
+                    ${m.badge ? `<span class="scarcity-badge">${m.badge}</span>` : ''}
+                    <div class="grid-img-wrapper">
+                        <img src="${m.img}" class="grid-img" alt="${m.title}" loading="lazy" width="280" height="280">
+                    </div>
+                    <h3 class="artist-name">${m.title}</h3>
+                    <p class="track-title">${m.desc || ''}</p>
+                    <p class="modal-price">${fmt.format(m.price)}</p>
+                </article>
+            `).join('');
+        }
+    });
+    </script>
+
+    <div id="productModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <button class="close-modal close-product hover-target" aria-label="Sluiten" type="button">&times;</button>
+            <div class="modal-grid">
+                <div class="modal-image-col">
+                    <img src="" id="modalImg" alt="Product afbeelding">
+                </div>
+                <div class="modal-info-col">
+                    <h2 id="modalArtist"></h2>
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalDesc"></p>
+                    <div class="price-control-row">
+                        <span class="modal-price" id="modalPrice"></span>
+                        <div class="quantity-wrapper">
+                            <button class="qty-btn hover-target" data-action="decrease" aria-label="Aantal verminderen" type="button">-</button>
+                            <label for="modalQty" class="sr-only">Aantal</label>
+                            <input type="number" id="modalQty" value="1" min="1" readonly aria-label="Aantal">
+                            <button class="qty-btn hover-target" data-action="increase" aria-label="Aantal verhogen" type="button">+</button>
+                        </div>
+                    </div>
+                    <button id="addToCartBtn" class="add-cart-btn hover-target" type="button">TOEVOEGEN AAN WINKELWAGEN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Winkelwagen">
+        <div class="modal-content cart-content">
+            <div class="cart-title">WINKELWAGEN <button class="close-modal close-cart hover-target" aria-label="Sluiten" type="button">&times;</button></div>
+            <div id="cartItemsContainer" class="cart-items-container"></div>
+            <div class="cart-footer">
+                <div class="cart-total-row"><span>TOTAAL</span><span id="cartTotalPrice" aria-live="polite">€0.00</span></div>
+                <button class="action-btn checkout-btn hover-target" type="button">AFREKENEN</button>
+                <button class="continue-btn hover-target" id="continueShopping" type="button">VERDER WINKELEN</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-col brand-col">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="120" height="120">
+                <address>TRADITIONAL RECORDS HQ<br>Waterkant 12, Paramaribo<br><a href="mailto:info@traditionalrecords.sr" class="hover-target">info@traditionalrecords.sr</a></address>
+            </div>
+            <div class="footer-col newsletter-col">
+                <h3>THE NEWSLETTER</h3>
+                <p>Join the inner circle.</p>
+                <form class="newsletter-form" aria-label="Nieuwsbrief aanmelding">
+                    <label for="newsletter-email-shop" class="sr-only">E-mailadres</label>
+                    <input type="email" id="newsletter-email-shop" placeholder="EMAIL ADDRESS" required autocomplete="email">
+                    <button type="submit" class="hover-target">SUBSCRIBE</button>
+                </form>
+            </div>
+            <div class="footer-col links-col">
+                <h3>VERKENNEN</h3>
+                <ul class="footer-links">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="merch.html" class="hover-target">Merch</a></li>
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="magazine.html" class="hover-target">Magazine</a></li>
+                    <li><a href="poku-lobi-club.html" class="hover-target">Poku Lobi Club</a></li>
+                    <li><a href="sync.html" class="hover-target">Sync & Licensing</a></li>
+                    <li><a href="contact.html" class="hover-target">Contact</a></li>
+                </ul>
+                <ul class="footer-links" style="margin-top: 15px;">
+                    <li><a href="faq.html" class="hover-target" style="font-size:12px; font-weight:400;">FAQ</a></li>
+                    <li><a href="privacy.html" class="hover-target" style="font-size:12px; font-weight:400;">Privacy & Voorwaarden</a></li>
+                </ul>
+                <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

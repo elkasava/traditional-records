@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ontdek de artiesten van Traditional Records - Pawana, Faja Wowia, Stimofo en meer.">
+    <title>ARTIESTEN | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar scrolled" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target"><img src="logo.png" alt="Traditional Records Logo" width="50" height="50"></a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target active">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+        <div class="nav-actions">
+            <button id="openCartBtn" class="icon-link cart-link hover-target" aria-label="Winkelwagen openen" type="button">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span id="cartCountBadge" class="cart-count" aria-live="polite">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content" class="page-container">
+        <h1 class="section-title">ONZE ARTIESTEN</h1>
+        <div class="bento-grid" id="artistGrid">
+            <div class="loader" role="status">ARTIESTEN LADEN...</div>
+        </div>
+    </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const grid = document.getElementById('artistGrid');
+        if (!grid) return;
+
+        // Wait for MOCK_DB from script.js
+        const data = await (async () => {
+            for (let i = 0; i < 20; i++) {
+                if (window.MOCK_DB) return window.MOCK_DB;
+                await new Promise(r => setTimeout(r, 100));
+            }
+            return null;
+        })();
+
+        const releases = data?.releases || [];
+        if (!releases.length) {
+            grid.innerHTML = '<div class="loader">Geen artiesten gevonden.</div>';
+            return;
+        }
+
+        // Get unique artists, pick first release per artist for image/genre
+        const artistMap = new Map();
+        releases.forEach(r => {
+            if (!artistMap.has(r.artist)) {
+                artistMap.set(r.artist, { artist: r.artist, genre: r.genre, img: r.img });
+            }
+        });
+
+        const artists = Array.from(artistMap.values());
+
+        // Match to profile for bio snippet
+        const profiles = window.MOCK_DB?.artists || [];
+
+        grid.innerHTML = artists.map(a => {
+            const profile = profiles.find(p => p.name === a.artist);
+            const artistSlug = profile?.id || a.artist.toLowerCase().replace(/\s+/g, '-');
+            const bioSnippet = profile?.bio ? profile.bio.slice(0, 80) + '…' : a.genre;
+            return `
+            <a href="artiest-detail.html?id=${artistSlug}" class="release-card hover-target" style="text-decoration:none; display:block;" aria-label="Bekijk ${a.artist} profiel">
+                <div class="card-img-container">
+                    <img src="${a.img}" alt="${a.artist}" loading="lazy" width="280" height="280" onerror="this.src='cd-holder.jpg'">
+                </div>
+                <div class="card-info">
+                    <h3>${a.artist}</h3>
+                    <p>${bioSnippet}</p>
+                </div>
+            </a>`;
+        }).join('');
+    });
+    </script>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-col brand-col">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="120" height="120">
+                <address>TRADITIONAL RECORDS HQ<br>Waterkant 12, Paramaribo<br><a href="mailto:info@traditionalrecords.sr" class="hover-target">info@traditionalrecords.sr</a></address>
+            </div>
+            <div class="footer-col newsletter-col">
+                <h3>THE NEWSLETTER</h3>
+                <p>Join the inner circle.</p>
+                <form class="newsletter-form" aria-label="Nieuwsbrief aanmelding">
+                    <label for="newsletter-email-artiesten" class="sr-only">E-mailadres</label>
+                    <input type="email" id="newsletter-email-artiesten" placeholder="EMAIL ADDRESS" required autocomplete="email">
+                    <button type="submit" class="hover-target">SUBSCRIBE</button>
+                </form>
+            </div>
+            <div class="footer-col links-col">
+                <h3>VERKENNEN</h3>
+                <ul class="footer-links">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="merch.html" class="hover-target">Merch</a></li>
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="magazine.html" class="hover-target">Magazine</a></li>
+                    <li><a href="poku-lobi-club.html" class="hover-target">Poku Lobi Club</a></li>
+                    <li><a href="sync.html" class="hover-target">Sync & Licensing</a></li>
+                    <li><a href="contact.html" class="hover-target">Contact</a></li>
+                </ul>
+                <ul class="footer-links" style="margin-top: 15px;">
+                    <li><a href="faq.html" class="hover-target" style="font-size:12px; font-weight:400;">FAQ</a></li>
+                    <li><a href="privacy.html" class="hover-target" style="font-size:12px; font-weight:400;">Privacy & Voorwaarden</a></li>
+                </ul>
+                <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

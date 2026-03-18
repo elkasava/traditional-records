@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Poku Lobi Club — maandelijkse vinyl releases, exclusieve genre-kennis, gratis concertkaartjes en een spaarprogramma voor echte Surinaamse muziekliefhebbers.">
+    <title>POKU LOBI CLUB | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <style>
+
+/* =====================================================================
+   POKU LOBI CLUB — PAGE STYLES
+   ===================================================================== */
+
+/* HERO */
+.plc-hero {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 6% 100px;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+.plc-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(255,68,0,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 20%, rgba(255,68,0,0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+.plc-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 9px;
+    letter-spacing: 4px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 28px;
+}
+.plc-hero-eyebrow::before,
+.plc-hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--color-accent);
+    opacity: 0.5;
+}
+.plc-hero h1 {
+    font-size: clamp(4rem, 14vw, 12rem);
+    font-weight: 800;
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    margin: 0 0 8px;
+    position: relative;
+}
+.plc-hero h1 span {
+    display: block;
+    font-weight: 200;
+    font-style: italic;
+    color: #666;
+    font-size: 0.38em;
+    letter-spacing: -0.02em;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+.plc-hero-sub {
+    font-size: 17px;
+    color: #777;
+    max-width: 500px;
+    margin: 32px auto 52px;
+    line-height: 1.75;
+    font-weight: 300;
+}
+.plc-cta-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.plc-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: var(--color-accent);
+    color: #fff;
+    font-family: var(--font-main);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    cursor: none;
+}
+.plc-btn-primary:hover { opacity: 0.85; }
+.plc-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: 16px 28px;
+    border: 1px solid #222;
+    color: #666;
+    font-family: var(--font-main);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: none;
+}
+.plc-btn-ghost:hover { border-color: #555; color: #ccc; }
+
+/* SCROLL INDICATOR */
+.plc-scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: #333;
+    text-transform: uppercase;
+    font-weight: 700;
+    animation: scrollBob 2s ease-in-out infinite;
+}
+@keyframes scrollBob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(6px); }
+}
+
+/* SECTION WRAPPER */
+.plc-section {
+    padding: 100px 6%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.plc-section-divider {
+    border: none;
+    border-top: 1px solid #111;
+    margin: 0;
+}
+.plc-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--color-accent);
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.plc-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #1a1a1a;
+}
+
+/* PERKS GRID */
+.plc-perks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2px;
+}
+.plc-perk {
+    background: var(--color-card);
+    border: 1px solid #111;
+    padding: 44px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.3s;
+}
+.plc-perk:hover { border-color: #222; }
+.plc-perk-icon {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #1e1e1e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    flex-shrink: 0;
+}
+.plc-perk-title {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+}
+.plc-perk-desc {
+    font-size: 13px;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0;
+    flex: 1;
+}
+
+/* TIERS */
+.plc-tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    align-items: start;
+}
+.plc-tier {
+    background: var(--color-card);
+    border: 1px solid #111;
+    padding: 44px 36px 40px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: border-color 0.3s;
+}
+.plc-tier:hover { border-color: #222; }
+.plc-tier.featured { border-color: var(--color-accent); }
+.plc-tier-badge {
+    position: absolute;
+    top: -1px; right: 24px;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+}
+.plc-tier-name {
+    font-size: 9px;
+    letter-spacing: 3px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 16px;
+}
+.plc-tier-price {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+}
+.plc-tier-period { font-size: 11px; color: #444; margin-bottom: 36px; letter-spacing: 1px; }
+.plc-tier-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.plc-tier-features li {
+    font-size: 13px;
+    color: #bbb;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+}
+.plc-tier-features li .check {
+    color: var(--color-accent);
+    font-weight: 900;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.plc-tier-features li .dim { color: #444; }
+.plc-tier-pts {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--color-accent);
+    font-weight: 800;
+    text-transform: uppercase;
+    border-top: 1px solid #1a1a1a;
+    padding-top: 18px;
+    margin-bottom: 24px;
+}
+.plc-tier-btn {
+    display: block;
+    text-align: center;
+    padding: 15px 20px;
+    font-family: var(--font-main);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid #222;
+    color: var(--color-text);
+    background: transparent;
+    transition: all 0.2s;
+    cursor: none;
+}
+.plc-tier-btn:hover { border-color: #555; background: #111; }
+.plc-tier.featured .plc-tier-btn {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+}
+.plc-tier.featured .plc-tier-btn:hover { opacity: 0.85; }
+
+/* SPAAR PROGRAMMA */
+.plc-spaar-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    align-items: center;
+}
+.plc-spaar-info {
+    background: var(--color-card);
+    border: 1px solid #111;
+    padding: 60px 48px;
+}
+.plc-spaar-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    margin: 0 0 24px;
+}
+.plc-spaar-desc {
+    font-size: 15px;
+    color: #888;
+    line-height: 1.7;
+    font-weight: 300;
+    margin: 0 0 36px;
+}
+.plc-spaar-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.plc-spaar-level {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border: 1px solid #111;
+    background: #0a0a0a;
+}
+.plc-spaar-level-name {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.plc-spaar-level-pts {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--color-muted);
+}
+.plc-spaar-level-reward {
+    font-size: 10px;
+    color: var(--color-accent);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.plc-spaar-visual {
+    background: #050505;
+    border: 1px solid #111;
+    padding: 60px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+.plc-pts-display {
+    font-size: 100px;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    color: #111;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+.plc-pts-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #333;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.plc-pts-earn-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.plc-pts-earn-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #111;
+    font-size: 12px;
+}
+.plc-pts-earn-item:last-child { border-bottom: none; }
+.plc-pts-earn-action { color: #666; letter-spacing: 1px; font-size: 11px; text-transform: uppercase; }
+.plc-pts-earn-val { color: var(--color-accent); font-weight: 800; letter-spacing: 1px; font-size: 11px; }
+
+/* GENRE ACCORDION */
+.plc-genre-list { display: flex; flex-direction: column; gap: 2px; }
+.plc-genre-item { border: 1px solid #111; overflow: hidden; }
+.plc-genre-header {
+    width: 100%;
+    padding: 24px 28px;
+    background: var(--color-card);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    cursor: none;
+    transition: background 0.2s;
+    text-align: left;
+}
+.plc-genre-header:hover { background: #141414; }
+.plc-genre-header-left { display: flex; align-items: center; gap: 20px; }
+.plc-genre-number { font-size: 11px; color: #333; font-weight: 800; letter-spacing: 2px; width: 24px; flex-shrink: 0; }
+.plc-genre-name { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; color: var(--color-text); }
+.plc-genre-tag { font-size: 9px; letter-spacing: 2px; color: var(--color-muted); text-transform: uppercase; font-weight: 700; }
+.plc-genre-arrow { color: var(--color-muted); transition: transform 0.3s; flex-shrink: 0; }
+.plc-genre-item.open .plc-genre-arrow { transform: rotate(45deg); color: var(--color-accent); }
+.plc-genre-body {
+    display: none;
+    padding: 0 28px 32px 72px;
+    background: #050505;
+}
+.plc-genre-item.open .plc-genre-body { display: block; }
+.plc-genre-body p {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.8;
+    font-weight: 300;
+    margin: 0 0 20px;
+}
+.plc-genre-meta { display: flex; gap: 32px; flex-wrap: wrap; }
+.plc-genre-meta-item { display: flex; flex-direction: column; gap: 3px; }
+.plc-genre-meta-label { font-size: 8px; letter-spacing: 2px; color: #333; text-transform: uppercase; font-weight: 700; }
+.plc-genre-meta-val { font-size: 12px; color: #666; }
+.plc-genre-releases-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    text-decoration: none;
+    margin-top: 20px;
+    transition: gap 0.2s;
+}
+.plc-genre-releases-link:hover { gap: 14px; }
+
+/* SIGNUP FORM */
+.plc-form-outer {
+    background: #000;
+    border: 1px solid #111;
+}
+.plc-form-header {
+    padding: 60px 6%;
+    border-bottom: 1px solid #111;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.plc-form-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    margin: 0;
+}
+.plc-form-title em { font-style: italic; font-weight: 200; color: #555; display: block; font-size: 0.6em; }
+.plc-form-header p { font-size: 14px; color: #666; max-width: 340px; line-height: 1.6; margin: 0; }
+.plc-form-body { padding: 60px 6%; }
+.plc-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 860px;
+}
+.plc-form .span2 { grid-column: 1 / -1; }
+.plc-form input,
+.plc-form select,
+.plc-form textarea {
+    width: 100%;
+    padding: 16px 18px;
+    background: #080808;
+    border: 1px solid #1a1a1a;
+    color: var(--color-text);
+    font-family: var(--font-main);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+}
+.plc-form input::placeholder,
+.plc-form textarea::placeholder { color: #333; }
+.plc-form input:focus,
+.plc-form select:focus,
+.plc-form textarea:focus { border-color: #333; }
+.plc-form select option { background: #0f0f0f; text-transform: none; }
+.plc-form textarea { resize: vertical; min-height: 100px; text-transform: none; letter-spacing: 0.5px; }
+.plc-submit {
+    grid-column: 1 / -1;
+    padding: 18px 36px;
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    font-family: var(--font-main);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: none;
+    transition: opacity 0.2s;
+    margin-top: 8px;
+    width: fit-content;
+}
+.plc-submit:hover { opacity: 0.85; }
+.plc-form-note {
+    grid-column: 1 / -1;
+    font-size: 10px;
+    color: #333;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+.plc-success {
+    display: none;
+    padding: 80px 6%;
+    text-align: center;
+}
+.plc-success-mark {
+    font-size: 48px;
+    margin-bottom: 24px;
+    color: var(--color-accent);
+}
+.plc-success h3 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin: 0 0 12px;
+}
+.plc-success p { font-size: 14px; color: #666; margin: 0; }
+
+/* SEGMENTED INTERESTS */
+.plc-check-group { grid-column: 1 / -1; }
+.plc-check-label {
+    font-size: 9px; letter-spacing: 3px; color: var(--color-muted);
+    text-transform: uppercase; font-weight: 700; margin-bottom: 10px; display: block;
+}
+.plc-check-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px; }
+.plc-check-item {
+    display: flex; align-items: center; gap: 10px; padding: 11px 14px;
+    border: 1px solid #1a1a1a; background: #080808; cursor: none; transition: border-color 0.2s;
+}
+.plc-check-item:hover { border-color: #333; }
+.plc-check-item input[type="checkbox"] {
+    width: 14px; height: 14px; padding: 0; background: transparent;
+    border: 1px solid #2a2a2a; accent-color: var(--color-accent); cursor: none; flex-shrink: 0;
+}
+.plc-check-item span {
+    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--color-muted); font-weight: 700;
+}
+.plc-check-item:has(input:checked) { border-color: var(--color-accent); }
+.plc-check-item:has(input:checked) span { color: var(--color-text); }
+
+@media (max-width: 900px) {
+    .plc-spaar-row { grid-template-columns: 1fr; }
+    .plc-form { grid-template-columns: 1fr; }
+    .plc-form .span2 { grid-column: 1; }
+    .plc-genre-body { padding-left: 28px; }
+    .plc-form-header { flex-direction: column; align-items: flex-start; }
+}
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target">
+                <img src="logo.png" alt="Traditional Records Logo" width="120" height="120">
+            </a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu" role="navigation">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target active" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+        <div class="nav-actions">
+            <button id="toggleSearchBtn" class="icon-link hover-target" aria-label="Zoekbalk openen" type="button"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+            <button id="openCartBtn" class="icon-link cart-link hover-target" aria-label="Winkelwagen openen" type="button">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span id="cartCountBadge" class="cart-count" aria-live="polite">0</span>
+            </button>
+        </div>
+        <div class="search-bar-container" id="searchContainer" role="search">
+            <label for="searchInput" class="sr-only">Zoek artiest of titel</label>
+            <input type="search" id="searchInput" placeholder="ZOEK ARTIEST OF TITEL..." autocomplete="off">
+            <button id="closeSearch" class="close-search hover-target" aria-label="Zoekbalk sluiten" type="button">&times;</button>
+            <div id="searchResults" class="search-results" role="listbox"></div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+
+        <!-- ═══ HERO ═══════════════════════════════════════════════════════ -->
+        <section class="plc-hero">
+            <div>
+                <div class="plc-hero-eyebrow">Traditional Records</div>
+                <h1>
+                    <span>Poku Lobi</span>
+                    CLUB
+                </h1>
+                <p class="plc-hero-sub">Voor mensen die écht van Surinaamse muziek houden. Maandelijkse releases op vinyl, exclusieve genre-kennis, gratis concertkaartjes en een spaarprogramma.</p>
+                <div class="plc-cta-row">
+                    <a href="#aanmelden" class="plc-btn-primary hover-target">
+                        Word lid
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                    <a href="#tiers" class="plc-btn-ghost hover-target">Bekijk abonnementen</a>
+                </div>
+            </div>
+            <div class="plc-scroll-hint" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+                Scroll
+            </div>
+        </section>
+
+        <hr class="plc-section-divider">
+
+        <!-- ═══ WAT JE KRIJGT ════════════════════════════════════════════ -->
+        <section class="plc-section">
+            <p class="plc-label">Wat je krijgt als lid</p>
+            <div class="plc-perks">
+                <div class="plc-perk reveal">
+                    <div class="plc-perk-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6.5" stroke-dasharray="2 2"/></svg>
+                    </div>
+                    <h3 class="plc-perk-title">Maandelijkse Vinyl Release</h3>
+                    <p class="plc-perk-desc">Elke maand een exclusieve vinylpersing — gelecteerd door onze curatoren, opgestuurd naar jouw deur. Genummerd, soms gesigneerd, altijd gelimiteerd.</p>
+                </div>
+                <div class="plc-perk reveal">
+                    <div class="plc-perk-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    </div>
+                    <h3 class="plc-perk-title">Exclusieve Genre-kennis</h3>
+                    <p class="plc-perk-desc">Elke maand een diepgaand verhaal over Kaseko, Winti, Kawina of andere Surinaamse genres. De geschiedenis, de artiesten, de culturele betekenis — voor leden eerst.</p>
+                </div>
+                <div class="plc-perk reveal">
+                    <div class="plc-perk-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                    </div>
+                    <h3 class="plc-perk-title">Gratis Concertkaartjes</h3>
+                    <p class="plc-perk-desc">Leden ontvangen gratis kaartjes voor concerts van Traditional Records-artiesten. Van Paradiso tot 013 — jij staat er bij zonder te betalen.</p>
+                </div>
+                <div class="plc-perk reveal">
+                    <div class="plc-perk-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h3 class="plc-perk-title">Spaarprogramma</h3>
+                    <p class="plc-perk-desc">Verdien Poku-punten bij elke aankoop, elke maand lidmaatschap, en elk concert. Wissel in voor gratis vinyl, merch of backstage-toegang.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="plc-section-divider">
+
+        <!-- ═══ TIERS ════════════════════════════════════════════════════ -->
+        <section class="plc-section" id="tiers">
+            <p class="plc-label">Kies je abonnement</p>
+            <div class="plc-tiers">
+
+                <!-- LOBI STARTER -->
+                <div class="plc-tier reveal">
+                    <p class="plc-tier-name">Lobi Starter</p>
+                    <p class="plc-tier-price">€14</p>
+                    <p class="plc-tier-period">per maand · opzegbaar per maand</p>
+                    <ul class="plc-tier-features">
+                        <li><span class="check">✦</span> 1 × 7" single per maand</li>
+                        <li><span class="check">✦</span> Gelimiteerde oplage, genummerd</li>
+                        <li><span class="check">✦</span> Maandelijkse genre-nieuwsbrief</li>
+                        <li><span class="check">✦</span> 2 gratis concertkaartjes per jaar</li>
+                        <li><span class="check">✦</span> 10% korting in de shop</li>
+                        <li><span class="check">✦</span> 1× Poku-punt per € uitgegeven</li>
+                    </ul>
+                    <p class="plc-tier-pts">✦ 14 punten / maand</p>
+                    <a href="#aanmelden" class="plc-tier-btn hover-target">Aanmelden</a>
+                </div>
+
+                <!-- LOBI PLUS (featured) -->
+                <div class="plc-tier featured reveal">
+                    <span class="plc-tier-badge">Meest populair</span>
+                    <p class="plc-tier-name">Lobi Plus</p>
+                    <p class="plc-tier-price">€28</p>
+                    <p class="plc-tier-period">per maand · opzegbaar per maand</p>
+                    <ul class="plc-tier-features">
+                        <li><span class="check">✦</span> 1 × 12" LP per maand</li>
+                        <li><span class="check">✦</span> Eerste persing, genummerd + gesigneerd</li>
+                        <li><span class="check">✦</span> Uitgebreid genre-essay (NL/EN)</li>
+                        <li><span class="check">✦</span> Vroeg toegang tot nieuwe releases</li>
+                        <li><span class="check">✦</span> 4 gratis concertkaartjes per jaar</li>
+                        <li><span class="check">✦</span> 15% korting in de shop</li>
+                        <li><span class="check">✦</span> 1,5× Poku-punten per € uitgegeven</li>
+                        <li><span class="check">✦</span> Leden-archief toegang</li>
+                    </ul>
+                    <p class="plc-tier-pts">✦ 42 punten / maand</p>
+                    <a href="#aanmelden" class="plc-tier-btn hover-target">Aanmelden</a>
+                </div>
+
+                <!-- LOBI ELITE -->
+                <div class="plc-tier reveal">
+                    <p class="plc-tier-name">Lobi Elite</p>
+                    <p class="plc-tier-price">€55</p>
+                    <p class="plc-tier-period">per maand · opzegbaar per maand</p>
+                    <ul class="plc-tier-features">
+                        <li><span class="check">✦</span> 2 × 12" LP — incl. coloured vinyl</li>
+                        <li><span class="check">✦</span> Gesigneerde sleeve + fysiek magazine</li>
+                        <li><span class="check">✦</span> Diepgaande genre-documentaire (video)</li>
+                        <li><span class="check">✦</span> Backstage uitnodigingen</li>
+                        <li><span class="check">✦</span> Onbeperkt concertkaartjes</li>
+                        <li><span class="check">✦</span> 20% korting in de shop</li>
+                        <li><span class="check">✦</span> 2× Poku-punten per € uitgegeven</li>
+                        <li><span class="check">✦</span> Direct contact met het label</li>
+                    </ul>
+                    <p class="plc-tier-pts">✦ 110 punten / maand</p>
+                    <a href="#aanmelden" class="plc-tier-btn hover-target">Aanmelden</a>
+                </div>
+
+            </div>
+        </section>
+
+        <hr class="plc-section-divider">
+
+        <!-- ═══ SPAARPROGRAMMA ═══════════════════════════════════════════ -->
+        <section class="plc-section">
+            <p class="plc-label">Poku Spaarprogramma</p>
+            <div class="plc-spaar-row">
+                <div class="plc-spaar-info reveal">
+                    <h2 class="plc-spaar-title">Spaar.<br>Wissel in.<br>Geniet.</h2>
+                    <p class="plc-spaar-desc">Elke euro die je bij Traditional Records uitgeeft, elke maand dat je lid bent en elk concert dat je bezoekt levert Poku-punten op. Hoe meer je spaart, hoe exclusiever je beloningen.</p>
+                    <div class="plc-spaar-levels">
+                        <div class="plc-spaar-level">
+                            <span class="plc-spaar-level-name" style="color:#b87333;">Brons</span>
+                            <span class="plc-spaar-level-pts">0 – 299 punten</span>
+                            <span class="plc-spaar-level-reward">Gratis merch</span>
+                        </div>
+                        <div class="plc-spaar-level">
+                            <span class="plc-spaar-level-name" style="color:#aaa;">Zilver</span>
+                            <span class="plc-spaar-level-pts">300 – 799 punten</span>
+                            <span class="plc-spaar-level-reward">Gratis vinyl</span>
+                        </div>
+                        <div class="plc-spaar-level">
+                            <span class="plc-spaar-level-name" style="color:#ffd700;">Goud</span>
+                            <span class="plc-spaar-level-pts">800 – 1999 punten</span>
+                            <span class="plc-spaar-level-reward">Backstage pass</span>
+                        </div>
+                        <div class="plc-spaar-level">
+                            <span class="plc-spaar-level-name" style="color:var(--color-accent);">Platina</span>
+                            <span class="plc-spaar-level-pts">2000+ punten</span>
+                            <span class="plc-spaar-level-reward">Studio-sessie + alles</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="plc-spaar-visual reveal">
+                    <div>
+                        <div class="plc-pts-display">✦</div>
+                        <p class="plc-pts-label">Poku-punten verdienen</p>
+                    </div>
+                    <div class="plc-pts-earn-list">
+                        <div class="plc-pts-earn-item">
+                            <span class="plc-pts-earn-action">Aankoop in de shop</span>
+                            <span class="plc-pts-earn-val">1 pt / €1</span>
+                        </div>
+                        <div class="plc-pts-earn-item">
+                            <span class="plc-pts-earn-action">Maandlidmaatschap Starter</span>
+                            <span class="plc-pts-earn-val">14 pt / mnd</span>
+                        </div>
+                        <div class="plc-pts-earn-item">
+                            <span class="plc-pts-earn-action">Maandlidmaatschap Plus</span>
+                            <span class="plc-pts-earn-val">42 pt / mnd</span>
+                        </div>
+                        <div class="plc-pts-earn-item">
+                            <span class="plc-pts-earn-action">Maandlidmaatschap Elite</span>
+                            <span class="plc-pts-earn-val">110 pt / mnd</span>
+                        </div>
+                        <div class="plc-pts-earn-item">
+                            <span class="plc-pts-earn-action">Concert bezoeken</span>
+                            <span class="plc-pts-earn-val">25 pt / show</span>
+                        </div>
+                        <div class="plc-pts-earn-item">
+                            <span class="plc-pts-earn-action">Review schrijven</span>
+                            <span class="plc-pts-earn-val">10 pt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="plc-section-divider">
+
+        <!-- ═══ GENRE ENCYCLOPEDIE ════════════════════════════════════════ -->
+        <section class="plc-section">
+            <p class="plc-label">Genre Encyclopedie</p>
+            <div class="plc-genre-list" id="plcGenreList">
+                <!-- filled by JS -->
+            </div>
+        </section>
+
+        <hr class="plc-section-divider">
+
+        <!-- ═══ AANMELDEN ════════════════════════════════════════════════ -->
+        <div class="plc-form-outer" id="aanmelden">
+            <div class="plc-form-header">
+                <h2 class="plc-form-title">
+                    <em>Word lid van de</em>
+                    Poku Lobi Club.
+                </h2>
+                <p>Vul je gegevens in. We bevestigen je aanmelding per e-mail en laten je weten zodra de club officieel van start gaat.</p>
+            </div>
+            <div class="plc-form-body">
+                <div id="plcFormContainer">
+                    <form class="plc-form" id="plcForm" action="https://formspree.io/f/mlgpblwo" method="POST" novalidate>
+                        <input type="hidden" name="_subject" value="Poku Lobi Club Aanmelding">
+                        <input type="text"  name="voornaam"    placeholder="Voornaam"     required autocomplete="given-name">
+                        <input type="text"  name="achternaam"  placeholder="Achternaam"   required autocomplete="family-name">
+                        <input type="email" name="email"       placeholder="E-mailadres"  required autocomplete="email" class="span2">
+                        <input type="text"  name="stad"        placeholder="Stad"         autocomplete="address-level2">
+                        <input type="text"  name="land"        placeholder="Land"         autocomplete="country-name">
+                        <select name="abonnement" class="span2">
+                            <option value="" disabled selected>Kies abonnement</option>
+                            <option value="starter">Lobi Starter — €14/mnd (7" single)</option>
+                            <option value="plus">Lobi Plus — €28/mnd (12" LP)</option>
+                            <option value="elite">Lobi Elite — €55/mnd (2× LP + extras)</option>
+                        </select>
+                        <div class="plc-check-group">
+                            <span class="plc-check-label">Favoriete genres</span>
+                            <div class="plc-check-grid">
+                                <label class="plc-check-item hover-target"><input type="checkbox" name="genre[]" value="Kaseko"><span>Kaseko</span></label>
+                                <label class="plc-check-item hover-target"><input type="checkbox" name="genre[]" value="Kawina"><span>Kawina</span></label>
+                                <label class="plc-check-item hover-target"><input type="checkbox" name="genre[]" value="Winti"><span>Winti</span></label>
+                                <label class="plc-check-item hover-target"><input type="checkbox" name="genre[]" value="Dancehall"><span>Dancehall</span></label>
+                                <label class="plc-check-item hover-target"><input type="checkbox" name="genre[]" value="Gospel"><span>Gospel</span></label>
+                                <label class="plc-check-item hover-target"><input type="checkbox" name="genre[]" value="Zouk"><span>Zouk</span></label>
+                            </div>
+                            <span class="plc-check-label" style="margin-top:16px;">Updates ontvangen over</span>
+                            <div class="plc-check-grid">
+                                <label class="plc-check-item hover-target"><input type="checkbox" name="update[]" value="Nieuwe releases" checked><span>Nieuwe releases</span></label>
+                                <label class="plc-check-item hover-target"><input type="checkbox" name="update[]" value="Concerten" checked><span>Concerten</span></label>
+                                <label class="plc-check-item hover-target"><input type="checkbox" name="update[]" value="Vinyl drops"><span>Vinyl drops</span></label>
+                                <label class="plc-check-item hover-target"><input type="checkbox" name="update[]" value="Magazine"><span>Magazine</span></label>
+                            </div>
+                        </div>
+                        <textarea name="bericht" placeholder="Bericht (optioneel) — favoriete artiest, speciale wensen..." class="span2"></textarea>
+                        <button type="submit" class="plc-submit hover-target">Aanmelding versturen ✦</button>
+                        <p class="plc-form-note">Geen betaling bij aanmelding. We sturen een bevestigingsmail.</p>
+                    </form>
+                </div>
+                <div class="plc-success" id="plcSuccess">
+                    <div class="plc-success-mark">✦</div>
+                    <h3>Welkom in de club.</h3>
+                    <p>Je aanmelding is ontvangen. We nemen snel contact op.<br>Poku lobi — muziekliefde voor altijd.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="60" height="60">
+                <p class="footer-tagline">Surinaamse erfgoedmuziek.<br>Wereldwijd gedeeld.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4 class="footer-links-title">Club</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#tiers" class="hover-target">Abonnementen</a></li>
+                    <li><a href="#aanmelden" class="hover-target">Word lid</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-group">
+                <h4 class="footer-links-title">Label</h4>
+                <ul class="footer-links-list">
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="sync.html" class="hover-target">Sync & Licensing</a></li>
+                    <li><a href="over.html" class="hover-target">Over Ons</a></li>
+                    <li><a href="contact.html" class="hover-target">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+        </div>
+    </footer>
+
+    <script>
+    // Genre data
+    const PLC_GENRES = [
+        { key:"KASEKO",          name:"Kaseko",          origin:"Paramaribo, Suriname", era:"1940s – heden", roots:"Afrikaans, Europees, Caraïbisch",     desc:"Kaseko is de meest herkenbare dansmuziek van Suriname. Geboren in de volkswijken van Paramaribo, versmelt het Afrikaanse polyritmes met Europese blaasinstrumenten en Caraïbische beats. De naam komt van het Franse 'Cassez le corps' — breek je lichaam. Gespeeld op feesten, begrafenissen en nationale vieringen." },
+        { key:"KAWINA",          name:"Kawina",           origin:"Suriname",             era:"1930s – heden", roots:"Javaans, Afro-Surinaams",              desc:"Kawina is de feestmuziek van de Surinaams-Javaanse gemeenschap. Snelle percussie, aanstekelijke zanglijnen en een dans-voor-je-leven ritme. Op bruiloften en dorpsfeesten is Kawina onmisbaar — levend cultureel erfgoed van de Surinaamse multiculturele samenleving." },
+        { key:"WINTI",           name:"Winti",            origin:"Suriname / Afrikaans", era:"17e eeuw – heden", roots:"West-Afrikaans, Obia-tradities",   desc:"Winti is meer dan muziek — het is een religie. De krachtige, repetitieve trommelpatronen en rituele zang roepen vooroudergeesten aan en begeleiden spirituele ceremonies. Diep geworteld in West-Afrikaanse tradities, vandaag de dag opnieuw ontdekt door nieuwe generaties Surinamers wereldwijd." },
+        { key:"DANCEHALL REGGAE",name:"Dancehall & Reggae",origin:"Jamaica / Suriname",  era:"1980s – heden", roots:"Jamaicaans Reggae, Dancehall",         desc:"Via de Surinaamse diaspora in Nederland reisde het geluid van Jamaica naar Paramaribo en weer terug. Artiesten als Faja Wowia, Ghetto Crew en Papa Touwtjie gaven dancehall een uniek Surinaams accent — met Sranantongo teksten en scherpe straatobservaties." },
+        { key:"GOSPEL",          name:"Gospel & Bazijn",  origin:"Suriname",             era:"19e eeuw – heden",roots:"Moravische zending, Afrikaans",       desc:"De Surinaamse gospelmuziek kent twee gezichten: internationale gospel en traditioneel Bazijn — de Creoolse kerkmuziek die voortkomt uit de Moravische zending van de 18e en 19e eeuw. Bazijn combineert Europese koortradities met Afro-Surinaamse ritmes." },
+        { key:"ZOUK",            name:"Zouk",             origin:"Frans-Caraïbisch",     era:"1980s – heden", roots:"Guadeloupe, Martinique, Lambada",       desc:"Zouk bereikte Suriname via de Caraïbische diaspora en vond een warm onthaal. Het sensuelle, langzame geluid van bands als Kassav inspireerde Surinaamse artiesten. De Surinaamse zouk onderscheidt zich door romantische teksten en de warmte van een multiculturele samenleving." },
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Build genre accordion
+        const list = document.getElementById('plcGenreList');
+        const db   = window.MOCK_DB;
+
+        list.innerHTML = PLC_GENRES.map((g, i) => {
+            const count = db ? db.releases.filter(r => r.genre === g.key).length : 0;
+            return `
+            <div class="plc-genre-item" data-index="${i}">
+                <button class="plc-genre-header hover-target" type="button" aria-expanded="false">
+                    <div class="plc-genre-header-left">
+                        <span class="plc-genre-number">0${i+1}</span>
+                        <div>
+                            <p class="plc-genre-name">${g.name}</p>
+                            <p class="plc-genre-tag">${g.origin} &nbsp;·&nbsp; ${g.era}</p>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px;">
+                        ${count > 0 ? `<span style="font-size:9px;letter-spacing:2px;color:#333;font-weight:700;">${count} RELEASES</span>` : ''}
+                        <svg class="plc-genre-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </div>
+                </button>
+                <div class="plc-genre-body">
+                    <p>${g.desc}</p>
+                    <div class="plc-genre-meta">
+                        <div class="plc-genre-meta-item"><span class="plc-genre-meta-label">Wortels</span><span class="plc-genre-meta-val">${g.roots}</span></div>
+                        <div class="plc-genre-meta-item"><span class="plc-genre-meta-label">Era</span><span class="plc-genre-meta-val">${g.era}</span></div>
+                    </div>
+                    ${count > 0 ? `<a href="releases.html" class="plc-genre-releases-link hover-target">${count} release${count!==1?'s':''} in de catalogus →</a>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+
+        // Accordion toggle
+        list.addEventListener('click', e => {
+            const btn = e.target.closest('.plc-genre-header');
+            if (!btn) return;
+            const item = btn.closest('.plc-genre-item');
+            const isOpen = item.classList.contains('open');
+            list.querySelectorAll('.plc-genre-item').forEach(i => {
+                i.classList.remove('open');
+                i.querySelector('.plc-genre-header').setAttribute('aria-expanded','false');
+            });
+            if (!isOpen) {
+                item.classList.add('open');
+                btn.setAttribute('aria-expanded','true');
+            }
+        });
+
+        // Form submit
+        document.getElementById('plcForm')?.addEventListener('submit', async e => {
+            e.preventDefault();
+            const btn = e.target.querySelector('[type=submit]');
+            btn.textContent = 'Versturen...';
+            btn.disabled = true;
+            try {
+                const res = await fetch(e.target.action, {
+                    method: 'POST',
+                    body: new FormData(e.target),
+                    headers: { Accept: 'application/json' }
+                });
+                if (res.ok) {
+                    document.getElementById('plcFormContainer').style.display = 'none';
+                    document.getElementById('plcSuccess').style.display = 'block';
+                } else {
+                    btn.textContent = 'Probeer opnieuw';
+                    btn.disabled = false;
+                }
+            } catch {
+                btn.textContent = 'Probeer opnieuw';
+                btn.disabled = false;
+            }
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Traditional Records - High Fidelity Surinaamse Muziek. Ontdek onze catalogus van kaseko, kawina, winti en meer.">
+    <meta property="og:title" content="Traditional Records | Surinaamse Heritage Muziek">
+    <meta property="og:description" content="Het toonaangevende platenlabel voor Surinaamse erfgoedmuziek. Kaseko, Kawina, Winti, Gospel en meer op vinyl, CD en digitaal.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://traditionalrecords.sr/logo.png">
+    <meta property="og:url" content="https://traditionalrecords.sr/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Traditional Records | Surinaamse Heritage Muziek">
+    <meta name="twitter:image" content="https://traditionalrecords.sr/logo.png">
+    <link rel="canonical" href="https://traditionalrecords.sr/">
+    <meta name="view-transition" content="same-origin">
+    <title>TRADITIONAL RECORDS | EST. 2025</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target"><img src="logo.png" alt="Traditional Records Logo" width="120" height="120"></a>
+        </div>
+
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+
+        <div class="nav-pill-center" id="navMenu" role="navigation">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-actions">
+            <button id="toggleSearchBtn" class="icon-link hover-target" aria-label="Zoekbalk openen" type="button"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+            <button id="openCartBtn" class="icon-link cart-link hover-target" aria-label="Winkelwagen openen" type="button">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span id="cartCountBadge" class="cart-count" aria-live="polite">0</span>
+            </button>
+        </div>
+
+        <div class="search-bar-container" id="searchContainer" role="search" aria-label="Zoek in catalogus">
+            <label for="searchInput" class="sr-only">Zoek artiest of titel</label>
+            <input type="search" id="searchInput" placeholder="ZOEK ARTIEST OF TITEL..." autocomplete="off">
+            <button id="closeSearch" class="close-search hover-target" aria-label="Zoekbalk sluiten" type="button">&times;</button>
+            <div id="searchResults" class="search-results" role="listbox" aria-label="Zoekresultaten"></div>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="overlay" aria-hidden="true"></div>
+        <div class="slide" style="background-image: url('first.jpg');" role="img" aria-label="Artiest op het podium"></div>
+        <div class="slide" style="background-image: url('second.jpg');" role="img" aria-label="Muziekcollectie"></div>
+        <div class="slide" style="background-image: url('thirth.jpg');" role="img" aria-label="Live optreden"></div>
+        <div class="slide" style="background-image: url('forth.jpg');" role="img" aria-label="Studio sessie"></div>
+        <div class="slide" style="background-image: url('fifth.jpg');" role="img" aria-label="Vinyl collectie"></div>
+
+        <div class="hero-content" id="heroText">
+            <h1 class="hero-title"><span class="sonic-italic">Sonic</span><br>HERITAGE</h1>
+            <div style="display:flex; gap:16px; margin-top:32px; flex-wrap:wrap;">
+                <a href="releases.html" class="btn-hero-primary hover-target">ONTDEK CATALOGUS</a>
+                <a href="sync.html" class="btn-hero-secondary hover-target">SYNC &amp; LICENSING</a>
+            </div>
+        </div>
+
+        <div class="hero-dots" aria-hidden="true" id="heroDots">
+            <span class="hero-dot active"></span>
+            <span class="hero-dot"></span>
+            <span class="hero-dot"></span>
+            <span class="hero-dot"></span>
+            <span class="hero-dot"></span>
+        </div>
+    </header>
+
+    <div class="stats-bar" aria-label="Label statistieken">
+        <div class="stats-bar-inner">
+            <div class="stat-item"><span class="stat-num">400+</span><span class="stat-label">Tracks</span></div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="stat-item"><span class="stat-num">14</span><span class="stat-label">Artiesten</span></div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="stat-item"><span class="stat-num">7</span><span class="stat-label">Genres</span></div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="stat-item"><span class="stat-num">EST.</span><span class="stat-label">2025</span></div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="stat-item"><span class="stat-num">WW</span><span class="stat-label">Shipping</span></div>
+        </div>
+    </div>
+
+    <main id="main-content">
+
+        <section class="new-releases reveal" id="releases" aria-labelledby="releases-heading">
+
+            <h2 class="section-title" id="releases-heading">NIEUWSTE RELEASES</h2>
+
+            <div class="genre-filter" id="genreFilter" role="group" aria-label="Filter op genre">
+                <button class="genre-btn active hover-target" data-genre="all">ALLES</button>
+                <button class="genre-btn hover-target" data-genre="WINTI">WINTI</button>
+                <button class="genre-btn hover-target" data-genre="KASEKO">KASEKO</button>
+                <button class="genre-btn hover-target" data-genre="DANCEHALL">DANCEHALL</button>
+                <button class="genre-btn hover-target" data-genre="REGGAE">REGGAE</button>
+                <button class="genre-btn hover-target" data-genre="KAWINA">KAWINA</button>
+                <button class="genre-btn hover-target" data-genre="GOSPEL">GOSPEL</button>
+                <button class="genre-btn hover-target" data-genre="ZOUK">ZOUK</button>
+                <button class="genre-btn hover-target" data-genre="GROOT BAZUIN">GROOT BAZUIN</button>
+            </div>
+
+            <div class="releases-wrapper">
+                <div class="decor-vinyl">
+                    <div class="vinyl-spin-group">
+                        <div class="vinyl-disc-css">
+                            <div class="vinyl-shine-base"></div>
+                            <div class="vinyl-shine-top"></div>
+                        </div>
+                        <div class="vinyl-label" aria-hidden="true"><img src="logo.png" alt="" width="60" height="60"></div>
+                    </div>
+                </div>
+                <div class="bento-grid" id="releasesGrid" aria-live="polite">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+
+            <div class="view-all-container">
+                <a href="releases.html" class="view-all-link hover-target">BEKIJK VOLLEDIGE CATALOGUS</a>
+            </div>
+        </section>
+
+        <a href="shop.html" class="ticker-bar-divider hover-target" aria-label="Bekijk shop - genres en artiesten">
+            <div class="ticker" aria-hidden="true">
+                <div class="ticker-item">KASEKO • KAWINA • WINTI • BANJA • AWASA • ALEKE • SOUL • SOKO • PSALM • GOSPEL/BAZIJN • SURI SOUL • REGGAE • DANCEHALL - WORLDWIDE SHIPPING • KENNY B • THEO BIJLHOUT • DAMARU • KATER KARMA • THE GENERALS • NAKS KASEKO LOKO • STIMOFO • TRANGA RUGIE • BRYAN B • PAPA TOUWTJIE • DANCEHALL CREW • KING KOYEBA • SABAKOE • APTIJT •</div>
+                <div class="ticker-item">KASEKO • KAWINA • WINTI • BANJA • AWASA • ALEKE • SOUL • SOKO • PSALM • GOSPEL/BAZIJN • SURI SOUL • REGGAE • DANCEHALL - WORLDWIDE SHIPPING • KENNY B • THEO BIJLHOUT • DAMARU • KATER KARMA • THE GENERALS • NAKS KASEKO LOKO • STIMOFO • TRANGA RUGIE • BRYAN B • PAPA TOUWTJIE • DANCEHALL CREW • KING KOYEBA • SABAKOE • APTIJT •</div>
+            </div>
+        </a>
+
+        <section class="merch-section reveal" id="merch" aria-labelledby="merch-heading">
+            <h2 class="section-title" id="merch-heading">LIMITED MERCH</h2>
+            <div class="merch-carousel-wrapper">
+                <button class="carousel-arrow prev hover-target" id="merchPrevBtn" aria-label="Vorige merch items"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+                <div class="merch-track" id="merchTrack" role="region" aria-label="Merch carousel" tabindex="0"></div>
+                <button class="carousel-arrow next hover-target" id="merchNextBtn" aria-label="Volgende merch items"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
+        </section>
+
+        <section class="agenda-section reveal" id="agenda" aria-labelledby="agenda-heading">
+            <h2 class="section-title" id="agenda-heading">TOUR DATES</h2>
+            <div class="agenda-list-classic" id="agendaList" aria-live="polite"></div>
+        </section>
+
+        <section class="mag-teaser reveal" aria-labelledby="mag-teaser-heading">
+            <div class="mag-teaser-header">
+                <h2 class="section-title" id="mag-teaser-heading" style="margin:0;">MAGAZINE</h2>
+                <a href="magazine.html" class="view-all-link hover-target" style="margin:0;">ALLE ARTIKELEN →</a>
+            </div>
+            <div class="mag-teaser-grid">
+                <a href="magazine.html" class="mag-teaser-card hover-target">
+                    <div class="mag-teaser-img" style="background-image:url('first.jpg');"></div>
+                    <div class="mag-teaser-body">
+                        <span class="mag-teaser-cat">Geschiedenis</span>
+                        <h3 class="mag-teaser-title">De Geboorte van Kaseko</h3>
+                        <p class="mag-teaser-excerpt">Hoe een genre ontstond uit de fusie van Creoolse tradities, Afrikaanse ritmes en Caribische invloeden.</p>
+                    </div>
+                </a>
+                <a href="magazine.html" class="mag-teaser-card hover-target">
+                    <div class="mag-teaser-img" style="background-image:url('forth.jpg');"></div>
+                    <div class="mag-teaser-body">
+                        <span class="mag-teaser-cat">Interview</span>
+                        <h3 class="mag-teaser-title">Producer Spotlight: De Sound van Paramaribo</h3>
+                        <p class="mag-teaser-excerpt">Over samplen van kawina, analoge synthesizers en culturele authenticiteit in de moderne studio.</p>
+                    </div>
+                </a>
+                <a href="magazine.html" class="mag-teaser-card hover-target">
+                    <div class="mag-teaser-img" style="background-image:url('second.jpg');"></div>
+                    <div class="mag-teaser-body">
+                        <span class="mag-teaser-cat">Cultuur</span>
+                        <h3 class="mag-teaser-title">Vinyl Revival: Waarom Analoog Wint</h3>
+                        <p class="mag-teaser-excerpt">Hoe het vinyl revival de Surinaamse muziekcultuur raakt en wat Traditional Records doet om de collectie te bewaren.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer reveal" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-col brand-col">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="120" height="120">
+                <address>
+                    TRADITIONAL RECORDS HQ<br>
+                    Waterkant 12, Paramaribo<br>
+                    <a href="mailto:info@traditionalrecords.sr" class="hover-target">info@traditionalrecords.sr</a>
+                </address>
+                <div class="social-icons">
+                    <a href="https://instagram.com/traditionalrecords" target="_blank" rel="noopener" class="hover-target" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://open.spotify.com/search/Traditional%20Records%20Suriname" target="_blank" rel="noopener" class="hover-target" aria-label="Spotify"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8 11.5c5-2 8.5-1 9.5-.5"></path><path d="M7.5 14.5c5-2 8.5-1 9.5-.5"></path><path d="M7 17.5c5-2 8.5-1 9.5-.5"></path></svg></a>
+                    <a href="https://facebook.com/traditionalrecords" target="_blank" rel="noopener" class="hover-target" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                </div>
+            </div>
+            <div class="footer-col newsletter-col">
+                <h3>THE NEWSLETTER</h3>
+                <p>Join the inner circle.</p>
+                <form class="newsletter-form" aria-label="Nieuwsbrief aanmelding">
+                    <label for="newsletter-email" class="sr-only">E-mailadres</label>
+                    <input type="email" id="newsletter-email" placeholder="EMAIL ADDRESS" required autocomplete="email">
+                    <button type="submit" class="hover-target">SUBSCRIBE <svg width="14" height="10" viewBox="0 0 18 12" fill="none" stroke="currentColor" aria-hidden="true"><path d="M12.5 1.5L17 6M17 6L12.5 10.5M17 6H1"/></svg></button>
+                </form>
+            </div>
+            <div class="footer-col links-col">
+                <h3>VERKENNEN</h3>
+                <ul class="footer-links">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="merch.html" class="hover-target">Merch</a></li>
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="magazine.html" class="hover-target">Magazine</a></li>
+                    <li><a href="poku-lobi-club.html" class="hover-target">Poku Lobi Club</a></li>
+                    <li><a href="sync.html" class="hover-target">Sync & Licensing</a></li>
+                    <li><a href="contact.html" class="hover-target">Contact</a></li>
+                </ul>
+                <ul class="footer-links" style="margin-top: 15px;">
+                    <li><a href="faq.html" class="hover-target" style="font-size:12px; font-weight:400;">FAQ</a></li>
+                    <li><a href="privacy.html" class="hover-target" style="font-size:12px; font-weight:400;">Privacy & Voorwaarden</a></li>
+                </ul>
+                <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="productModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <button class="close-modal close-product hover-target" aria-label="Sluiten" type="button">&times;</button>
+            <div class="modal-grid">
+                <div class="modal-image-col">
+                    <img src="" id="modalImg" alt="Product afbeelding">
+                </div>
+                <div class="modal-info-col">
+                    <h2 id="modalArtist"></h2>
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalDesc"></p>
+                    <div class="price-control-row">
+                        <span class="modal-price" id="modalPrice"></span>
+                        <div class="quantity-wrapper">
+                            <button class="qty-btn hover-target" data-action="decrease" aria-label="Aantal verminderen" type="button">-</button>
+                            <label for="modalQty" class="sr-only">Aantal</label>
+                            <input type="number" id="modalQty" value="1" min="1" readonly aria-label="Aantal">
+                            <button class="qty-btn hover-target" data-action="increase" aria-label="Aantal verhogen" type="button">+</button>
+                        </div>
+                    </div>
+                    <button id="addToCartBtn" class="add-cart-btn hover-target" type="button">TOEVOEGEN AAN WINKELWAGEN</button>
+                    <!-- AUDIO PREVIEW -->
+                    <div id="audioPreviewSection" class="audio-preview-section">
+                        <div id="audioPreviewStatus" class="audio-status">
+                            <span class="audio-status-dot"></span>
+                            <span id="audioStatusText">Preview laden...</span>
+                        </div>
+                        <div id="audioPlayerUI" class="audio-player-ui" style="display:none;">
+                            <button id="audioPlayBtn" class="audio-play-btn hover-target" type="button" aria-label="Preview afspelen">
+                                <svg id="playIcon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>
+                                <svg id="pauseIcon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                            </button>
+                            <div class="audio-track-info">
+                                <span class="audio-label">30 SEC PREVIEW</span>
+                                <div class="audio-progress-bar" role="progressbar" aria-label="Preview voortgang">
+                                    <div id="audioProgress" class="audio-progress-fill"></div>
+                                </div>
+                            </div>
+                            <span id="audioTimer" class="audio-timer">0:30</span>
+                        </div>
+                        <audio id="audioPreview" preload="none" aria-hidden="true">
+                            <source id="audioSource" src="" type="audio/mpeg">
+                        </audio>
+                    </div>
+
+                    <a id="modalSpotifyBtn" class="spotify-btn hover-target" target="_blank" rel="noopener noreferrer" href="#" style="display:none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                        OPEN IN SPOTIFY
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Winkelwagen">
+        <div class="modal-content cart-content">
+            <div class="cart-title">WINKELWAGEN <button class="close-modal close-cart hover-target" aria-label="Winkelwagen sluiten" type="button">&times;</button></div>
+            <div id="cartItemsContainer" class="cart-items-container"></div>
+            <div class="cart-footer">
+                <div class="cart-total-row">
+                    <span>TOTAAL</span>
+                    <span id="cartTotalPrice" aria-live="polite">€0.00</span>
+                </div>
+                <button class="action-btn checkout-btn hover-target" type="button">AFREKENEN</button>
+                <button class="continue-btn hover-target" id="continueShopping" type="button">VERDER WINKELEN</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Artiest profiel - Traditional Records">
+    <title>ARTIEST | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <style>
+        /* ---- ARTIST HERO ---- */
+        .artist-hero {
+            position: relative;
+            height: 70vh;
+            min-height: 480px;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+        .artist-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center top;
+            filter: brightness(0.35) saturate(0.8);
+            transform: scale(1.05);
+            transition: transform 8s ease-out;
+        }
+        .artist-hero-bg.loaded { transform: scale(1.0); }
+        .artist-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #050505 0%, rgba(5,5,5,0.4) 60%, transparent 100%);
+        }
+        .artist-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 6% 60px;
+            width: 100%;
+        }
+        .artist-genre-tag {
+            display: inline-block;
+            font-size: 9px;
+            letter-spacing: 3px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            border: 1px solid var(--color-accent);
+            padding: 5px 12px;
+            margin-bottom: 18px;
+        }
+        .artist-hero-name {
+            font-size: clamp(3rem, 9vw, 8rem);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            color: #fff;
+            margin: 0 0 20px;
+        }
+        .artist-meta-row {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .artist-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .artist-meta-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .artist-meta-value {
+            font-size: 13px;
+            color: #ccc;
+            font-weight: 400;
+        }
+
+        /* ---- BODY ---- */
+        .artist-body {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 6%;
+        }
+        .artist-cols {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 80px;
+            align-items: start;
+        }
+
+        /* ---- BIO ---- */
+        .artist-bio-label {
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: var(--color-accent);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .artist-bio-text {
+            font-size: 20px;
+            line-height: 1.75;
+            color: #ccc;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        /* ---- SIDEBAR ---- */
+        .artist-sidebar {
+            position: sticky;
+            top: 110px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .artist-action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 24px;
+            font-family: var(--font-main);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid #1e1e1e;
+            color: var(--color-text);
+            background: var(--color-card);
+            transition: border-color 0.2s, background 0.2s;
+            cursor: none;
+        }
+        .artist-action-btn:hover { border-color: #444; background: #141414; }
+        .artist-action-btn.primary {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: #fff;
+        }
+        .artist-action-btn.primary:hover { opacity: 0.85; }
+        .artist-action-btn svg { flex-shrink: 0; }
+
+        /* ---- RELEASES ---- */
+        .artist-releases-section {
+            padding: 0 6% 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .releases-section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            border-top: 1px solid #1a1a1a;
+            padding-top: 40px;
+        }
+        .releases-section-header h2 {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--color-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        .releases-section-header a {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .artist-releases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2px;
+        }
+        .artist-release-card {
+            background: var(--color-card);
+            border: 1px solid #111;
+            overflow: hidden;
+            cursor: none;
+            transition: border-color 0.2s;
+        }
+        .artist-release-card:hover { border-color: #2a2a2a; }
+        .artist-release-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+            filter: saturate(0.9);
+        }
+        .artist-release-card-info {
+            padding: 14px 16px;
+        }
+        .artist-release-card-title {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-text);
+            margin: 0 0 4px;
+        }
+        .artist-release-card-meta {
+            font-size: 10px;
+            color: var(--color-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ---- BACK LINK ---- */
+        .artist-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            text-decoration: none;
+            padding: 120px 6% 0;
+            transition: color 0.2s;
+        }
+        .artist-back:hover { color: var(--color-text); }
+
+        @media (max-width: 900px) {
+            .artist-cols { grid-template-columns: 1fr; gap: 40px; }
+            .artist-sidebar { position: static; }
+            .artist-hero-name { font-size: clamp(2.5rem, 12vw, 5rem); }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar scrolled" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target">
+                <img src="logo.png" alt="Traditional Records Logo" width="50" height="50">
+            </a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target active">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+        <div class="nav-actions">
+            <button id="openCartBtn" class="icon-link cart-link hover-target" aria-label="Winkelwagen openen" type="button">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span id="cartCountBadge" class="cart-count" aria-live="polite">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Hero — filled by JS -->
+        <a href="artiesten.html" class="artist-back hover-target">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+            Alle artiesten
+        </a>
+
+        <div id="artistHero" class="artist-hero" style="margin-top:24px;">
+            <div id="artistHeroBg" class="artist-hero-bg"></div>
+            <div class="artist-hero-overlay"></div>
+            <div class="artist-hero-content">
+                <div id="artistGenreTag" class="artist-genre-tag"></div>
+                <h1 id="artistName" class="artist-hero-name"></h1>
+                <div class="artist-meta-row">
+                    <div class="artist-meta-item">
+                        <span class="artist-meta-label">Herkomst</span>
+                        <span id="artistOrigin" class="artist-meta-value"></span>
+                    </div>
+                    <div class="artist-meta-item">
+                        <span class="artist-meta-label">Actief</span>
+                        <span id="artistActive" class="artist-meta-value"></span>
+                    </div>
+                    <div class="artist-meta-item">
+                        <span class="artist-meta-label">Label</span>
+                        <span class="artist-meta-value">Traditional Records</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="artist-body">
+            <div class="artist-cols">
+                <div>
+                    <p class="artist-bio-label">Biografie</p>
+                    <p id="artistBio" class="artist-bio-text"></p>
+                </div>
+                <div class="artist-sidebar">
+                    <a id="artistSpotifyBtn" href="#" target="_blank" rel="noopener noreferrer" class="artist-action-btn primary hover-target" style="display:none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                        Beluister op Spotify
+                    </a>
+                    <a href="sync.html" class="artist-action-btn hover-target">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        Sync & Licensing
+                    </a>
+                    <a href="contact.html" class="artist-action-btn hover-target">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+                        Boekingsaanvraag
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="artist-releases-section">
+            <div class="releases-section-header">
+                <h2>Discografie</h2>
+                <a href="releases.html">Volledige catalogus →</a>
+            </div>
+            <div id="artistReleasesGrid" class="artist-releases-grid">
+                <div class="loader" role="status">Laden...</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="60" height="60">
+                <p class="footer-tagline">Surinaamse erfgoedmuziek.<br>Wereldwijd gedeeld.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4 class="footer-links-title">Navigatie</h4>
+                <ul class="footer-links-list">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="sync.html" class="hover-target">Sync & Licensing</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-group">
+                <h4 class="footer-links-title">Info</h4>
+                <ul class="footer-links-list">
+                    <li><a href="over.html" class="hover-target">Over Ons</a></li>
+                    <li><a href="contact.html" class="hover-target">Contact</a></li>
+                    <li><a href="faq.html" class="hover-target">FAQ</a></li>
+                    <li><a href="privacy.html" class="hover-target">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Get artist ID from URL param
+        const params = new URLSearchParams(window.location.search);
+        const artistId = params.get('id');
+
+        // Wait for MOCK_DB
+        const db = await (async () => {
+            for (let i = 0; i < 30; i++) {
+                if (window.MOCK_DB) return window.MOCK_DB;
+                await new Promise(r => setTimeout(r, 100));
+            }
+            return null;
+        })();
+
+        if (!db || !artistId) {
+            document.title = 'Artiest niet gevonden | Traditional Records';
+            document.getElementById('artistName').textContent = 'ARTIEST NIET GEVONDEN';
+            document.getElementById('artistBio').textContent = 'Ga terug naar het overzicht.';
+            return;
+        }
+
+        // Find artist profile
+        const profile = db.artists?.find(a => a.id === artistId);
+        // Fallback: derive from releases if no profile
+        const releases = db.releases.filter(r =>
+            r.artist.toLowerCase().replace(/\s+/g, '-') === artistId ||
+            (profile && r.artist === profile.name)
+        );
+
+        const name    = profile?.name    || artistId.replace(/-/g, ' ').toUpperCase();
+        const genre   = profile?.genre   || releases[0]?.genre || '';
+        const origin  = profile?.origin  || 'Suriname';
+        const active  = profile?.active  || '—';
+        const bio     = profile?.bio     || 'Biografie binnenkort beschikbaar.';
+        const img     = profile?.img     || releases[0]?.img || 'cd-holder.jpg';
+        const spotify = profile?.spotify || releases[0]?.spotify || null;
+
+        // Set page title
+        document.title = `${name} | TRADITIONAL RECORDS`;
+        document.querySelector('meta[name="description"]').content =
+            `${name} — ${genre} artiest bij Traditional Records. ${bio.slice(0, 120)}...`;
+
+        // Hero
+        const bg = document.getElementById('artistHeroBg');
+        bg.style.backgroundImage = `url('${img}')`;
+        setTimeout(() => bg.classList.add('loaded'), 100);
+
+        document.getElementById('artistGenreTag').textContent = genre;
+        document.getElementById('artistName').textContent     = name;
+        document.getElementById('artistOrigin').textContent   = origin;
+        document.getElementById('artistActive').textContent   = active;
+        document.getElementById('artistBio').textContent      = bio;
+
+        // Spotify button
+        const spotifyBtn = document.getElementById('artistSpotifyBtn');
+        if (spotifyBtn && spotify) {
+            spotifyBtn.href = spotify;
+            spotifyBtn.style.display = 'flex';
+        }
+
+        // Releases grid
+        const grid = document.getElementById('artistReleasesGrid');
+        if (!releases.length) {
+            grid.innerHTML = '<p style="color:var(--color-muted);font-size:13px;letter-spacing:1px;">Geen releases gevonden.</p>';
+            return;
+        }
+
+        grid.innerHTML = releases.map(r => `
+            <article class="artist-release-card" data-product-id="${r.id}" tabindex="0" role="button" aria-label="${r.title} kopen">
+                <img src="${r.img}" alt="${r.artist} - ${r.title}" loading="lazy">
+                <div class="artist-release-card-info">
+                    <p class="artist-release-card-title">${r.title}</p>
+                    <p class="artist-release-card-meta">${r.genre} &mdash; €${r.price.toFixed(2)}</p>
+                </div>
+            </article>
+        `).join('');
+
+        // Click on release card opens modal
+        grid.addEventListener('click', e => {
+            const card = e.target.closest('[data-product-id]');
+            if (card && window.Modules?.UI) {
+                window.Modules.UI.openModal(parseInt(card.dataset.productId));
+            }
+        });
+        grid.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const card = e.target.closest('[data-product-id]');
+                if (card && window.Modules?.UI) {
+                    e.preventDefault();
+                    window.Modules.UI.openModal(parseInt(card.dataset.productId));
+                }
+            }
+        });
+    });
+    </script>
+</body>
+</html>

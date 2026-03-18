@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Upcoming events en tour dates van Traditional Records artiesten - Concerten in Nederland en wereldwijd.">
+    <title>AGENDA | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar scrolled" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target"><img src="logo.png" alt="Traditional Records Logo" width="50" height="50"></a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+        <div class="nav-actions">
+            <button id="openCartBtn" class="icon-link cart-link hover-target" aria-label="Winkelwagen openen" type="button">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span id="cartCountBadge" class="cart-count" aria-live="polite">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <style>
+        .agenda-filters { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 40px; }
+        .agenda-filter-group { display: flex; flex-direction: column; gap: 8px; }
+        .agenda-filter-label { font-size: 9px; letter-spacing: 3px; color: var(--color-muted); text-transform: uppercase; }
+        .agenda-filter-bar { display: flex; flex-wrap: wrap; gap: 6px; }
+        .agenda-filter-btn {
+            font-size: 10px; letter-spacing: 2px; font-weight: 700;
+            font-family: var(--font-main); text-transform: uppercase;
+            padding: 7px 14px; background: transparent;
+            border: 1px solid #2a2a2a; color: var(--color-muted);
+            cursor: none; transition: all 0.2s;
+        }
+        .agenda-filter-btn:hover { border-color: #555; color: var(--color-text); }
+        .agenda-filter-btn.active { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
+        .agenda-event-list { display: flex; flex-direction: column; gap: 2px; }
+        .agenda-event-row {
+            display: grid;
+            grid-template-columns: 90px 1fr auto;
+            align-items: center;
+            background: var(--color-card);
+            border: 1px solid #1a1a1a;
+            padding: 24px 28px;
+            gap: 24px;
+            transition: border-color 0.2s;
+        }
+        .agenda-event-row:hover { border-color: #333; }
+        .agenda-event-date { text-align: center; }
+        .agenda-event-day { font-size: 36px; font-weight: 800; color: var(--color-text); line-height: 1; letter-spacing: -0.03em; }
+        .agenda-event-month { font-size: 10px; letter-spacing: 3px; font-weight: 700; color: var(--color-accent); text-transform: uppercase; margin-top: 4px; }
+        .agenda-event-info { display: flex; flex-direction: column; gap: 4px; }
+        .agenda-event-artist { font-size: 15px; font-weight: 800; color: var(--color-text); letter-spacing: 1px; text-transform: uppercase; }
+        .agenda-event-venue { font-size: 12px; color: var(--color-muted); }
+        .agenda-event-city { font-size: 10px; letter-spacing: 2px; color: var(--color-muted); text-transform: uppercase; margin-top: 2px; }
+        .agenda-event-cta {
+            font-size: 10px; letter-spacing: 2px; font-weight: 700;
+            font-family: var(--font-main); text-transform: uppercase;
+            padding: 10px 20px; background: transparent;
+            border: 1px solid #333; color: var(--color-text);
+            text-decoration: none; transition: all 0.2s; white-space: nowrap;
+        }
+        .agenda-event-cta:hover { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
+        .agenda-event-cta.soldout { border-color: #2a2a2a; color: var(--color-muted); pointer-events: none; }
+        .agenda-no-events { display: none; text-align: center; padding: 60px 20px; color: var(--color-muted); font-size: 11px; letter-spacing: 3px; }
+        @media (max-width: 600px) {
+            .agenda-event-row { grid-template-columns: 70px 1fr; padding: 18px 16px; }
+            .agenda-event-cta { display: none; }
+        }
+    </style>
+
+    <main id="main-content" class="page-container">
+        <h1 class="section-title">UPCOMING EVENTS</h1>
+
+        <div class="agenda-filters">
+            <div class="agenda-filter-group">
+                <div class="agenda-filter-label">Artiest</div>
+                <div class="agenda-filter-bar" id="artistFilters">
+                    <button class="agenda-filter-btn active" data-filter-artist="all">ALLE</button>
+                    <button class="agenda-filter-btn" data-filter-artist="pawana">PAWANA</button>
+                    <button class="agenda-filter-btn" data-filter-artist="faja-wowia">FAJA WOWIA</button>
+                    <button class="agenda-filter-btn" data-filter-artist="stimofo">STIMOFO</button>
+                    <button class="agenda-filter-btn" data-filter-artist="ghetto-crew">GHETTO CREW</button>
+                    <button class="agenda-filter-btn" data-filter-artist="papa-touwtjie">PAPA TOUWTJIE</button>
+                    <button class="agenda-filter-btn" data-filter-artist="the-messengers">THE MESSENGERS</button>
+                </div>
+            </div>
+            <div class="agenda-filter-group">
+                <div class="agenda-filter-label">Stad</div>
+                <div class="agenda-filter-bar" id="cityFilters">
+                    <button class="agenda-filter-btn active" data-filter-city="all">ALLE</button>
+                    <button class="agenda-filter-btn" data-filter-city="amsterdam">AMSTERDAM</button>
+                    <button class="agenda-filter-btn" data-filter-city="rotterdam">ROTTERDAM</button>
+                    <button class="agenda-filter-btn" data-filter-city="utrecht">UTRECHT</button>
+                    <button class="agenda-filter-btn" data-filter-city="tilburg">TILBURG</button>
+                    <button class="agenda-filter-btn" data-filter-city="den-haag">DEN HAAG</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="agenda-event-list" id="agendaEventList" aria-live="polite">
+            <div class="agenda-event-row" data-artist="pawana" data-city="amsterdam">
+                <div class="agenda-event-date"><div class="agenda-event-day">12</div><div class="agenda-event-month">MRT 2026</div></div>
+                <div class="agenda-event-info">
+                    <div class="agenda-event-artist">Pawana</div>
+                    <div class="agenda-event-venue">Paradiso</div>
+                    <div class="agenda-event-city">Amsterdam</div>
+                </div>
+                <a href="#" class="agenda-event-cta hover-target">TICKETS</a>
+            </div>
+            <div class="agenda-event-row" data-artist="faja-wowia" data-city="utrecht">
+                <div class="agenda-event-date"><div class="agenda-event-day">28</div><div class="agenda-event-month">MRT 2026</div></div>
+                <div class="agenda-event-info">
+                    <div class="agenda-event-artist">Faja Wowia</div>
+                    <div class="agenda-event-venue">Tivoli Vredenburg</div>
+                    <div class="agenda-event-city">Utrecht</div>
+                </div>
+                <a href="#" class="agenda-event-cta hover-target">TICKETS</a>
+            </div>
+            <div class="agenda-event-row" data-artist="stimofo" data-city="tilburg">
+                <div class="agenda-event-date"><div class="agenda-event-day">05</div><div class="agenda-event-month">APR 2026</div></div>
+                <div class="agenda-event-info">
+                    <div class="agenda-event-artist">Stimofo</div>
+                    <div class="agenda-event-venue">013</div>
+                    <div class="agenda-event-city">Tilburg</div>
+                </div>
+                <a href="#" class="agenda-event-cta hover-target">TICKETS</a>
+            </div>
+            <div class="agenda-event-row" data-artist="ghetto-crew" data-city="amsterdam">
+                <div class="agenda-event-date"><div class="agenda-event-day">18</div><div class="agenda-event-month">APR 2026</div></div>
+                <div class="agenda-event-info">
+                    <div class="agenda-event-artist">Ghetto Crew</div>
+                    <div class="agenda-event-venue">Melkweg</div>
+                    <div class="agenda-event-city">Amsterdam</div>
+                </div>
+                <a href="#" class="agenda-event-cta hover-target">TICKETS</a>
+            </div>
+            <div class="agenda-event-row" data-artist="papa-touwtjie" data-city="amsterdam">
+                <div class="agenda-event-date"><div class="agenda-event-day">24</div><div class="agenda-event-month">APR 2026</div></div>
+                <div class="agenda-event-info">
+                    <div class="agenda-event-artist">Papa Touwtjie</div>
+                    <div class="agenda-event-venue">Sugar Factory</div>
+                    <div class="agenda-event-city">Amsterdam</div>
+                </div>
+                <a href="#" class="agenda-event-cta hover-target">TICKETS</a>
+            </div>
+            <div class="agenda-event-row" data-artist="stimofo" data-city="amsterdam">
+                <div class="agenda-event-date"><div class="agenda-event-day">10</div><div class="agenda-event-month">MEI 2026</div></div>
+                <div class="agenda-event-info">
+                    <div class="agenda-event-artist">Stimofo</div>
+                    <div class="agenda-event-venue">AFAS Live</div>
+                    <div class="agenda-event-city">Amsterdam</div>
+                </div>
+                <a href="#" class="agenda-event-cta hover-target">TICKETS</a>
+            </div>
+            <div class="agenda-event-row" data-artist="pawana" data-city="rotterdam">
+                <div class="agenda-event-date"><div class="agenda-event-day">22</div><div class="agenda-event-month">MEI 2026</div></div>
+                <div class="agenda-event-info">
+                    <div class="agenda-event-artist">Pawana</div>
+                    <div class="agenda-event-venue">De Doelen</div>
+                    <div class="agenda-event-city">Rotterdam</div>
+                </div>
+                <a href="#" class="agenda-event-cta hover-target">TICKETS</a>
+            </div>
+            <div class="agenda-event-row" data-artist="faja-wowia" data-city="den-haag">
+                <div class="agenda-event-date"><div class="agenda-event-day">05</div><div class="agenda-event-month">JUN 2026</div></div>
+                <div class="agenda-event-info">
+                    <div class="agenda-event-artist">Faja Wowia</div>
+                    <div class="agenda-event-venue">Paard</div>
+                    <div class="agenda-event-city">Den Haag</div>
+                </div>
+                <a href="#" class="agenda-event-cta hover-target">TICKETS</a>
+            </div>
+            <div class="agenda-event-row" data-artist="the-messengers" data-city="amsterdam">
+                <div class="agenda-event-date"><div class="agenda-event-day">20</div><div class="agenda-event-month">JUN 2026</div></div>
+                <div class="agenda-event-info">
+                    <div class="agenda-event-artist">The Messengers</div>
+                    <div class="agenda-event-venue">Ziggo Dome</div>
+                    <div class="agenda-event-city">Amsterdam</div>
+                </div>
+                <a href="#" class="agenda-event-cta hover-target">TICKETS</a>
+            </div>
+            <div class="agenda-event-row" data-artist="ghetto-crew" data-city="rotterdam">
+                <div class="agenda-event-date"><div class="agenda-event-day">11</div><div class="agenda-event-month">JUL 2026</div></div>
+                <div class="agenda-event-info">
+                    <div class="agenda-event-artist">Ghetto Crew</div>
+                    <div class="agenda-event-venue">Luxor Live</div>
+                    <div class="agenda-event-city">Rotterdam</div>
+                </div>
+                <a href="#" class="agenda-event-cta hover-target">TICKETS</a>
+            </div>
+        </div>
+        <div class="agenda-no-events" id="agendaNoEvents">GEEN EVENEMENTEN GEVONDEN</div>
+    </main>
+
+    <script>
+    (function() {
+        let activeArtist = 'all', activeCity = 'all';
+        function applyAgendaFilters() {
+            const rows = document.querySelectorAll('#agendaEventList .agenda-event-row');
+            let visible = 0;
+            rows.forEach(row => {
+                const artistMatch = activeArtist === 'all' || row.dataset.artist === activeArtist;
+                const cityMatch = activeCity === 'all' || row.dataset.city === activeCity;
+                if (artistMatch && cityMatch) { row.hidden = false; visible++; }
+                else row.hidden = true;
+            });
+            const noEvents = document.getElementById('agendaNoEvents');
+            if (noEvents) noEvents.style.display = visible === 0 ? 'block' : 'none';
+        }
+        document.querySelectorAll('#artistFilters .agenda-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#artistFilters .agenda-filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeArtist = btn.dataset.filterArtist;
+                applyAgendaFilters();
+            });
+        });
+        document.querySelectorAll('#cityFilters .agenda-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#cityFilters .agenda-filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeCity = btn.dataset.filterCity;
+                applyAgendaFilters();
+            });
+        });
+    })();
+    </script>
+
+    <div id="cartModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Winkelwagen">
+        <div class="modal-content cart-content">
+            <div class="cart-title">WINKELWAGEN <button class="close-modal close-cart hover-target" aria-label="Sluiten" type="button">&times;</button></div>
+            <div class="cart-items-container" id="cartItemsContainer"></div>
+            <div class="cart-footer">
+                <div class="cart-total-row"><span>TOTAAL</span><span id="cartTotalPrice" aria-live="polite">€0.00</span></div>
+                <button class="action-btn checkout-btn hover-target" type="button">AFREKENEN</button>
+                <button class="continue-btn hover-target" id="continueShopping" type="button">VERDER WINKELEN</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-col brand-col">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="120" height="120">
+                <address>TRADITIONAL RECORDS HQ<br>Waterkant 12, Paramaribo<br><a href="mailto:info@traditionalrecords.sr" class="hover-target">info@traditionalrecords.sr</a></address>
+            </div>
+            <div class="footer-col newsletter-col">
+                <h3>THE NEWSLETTER</h3>
+                <p>Join the inner circle.</p>
+                <form class="newsletter-form" aria-label="Nieuwsbrief aanmelding">
+                    <label for="newsletter-email-agenda" class="sr-only">E-mailadres</label>
+                    <input type="email" id="newsletter-email-agenda" placeholder="EMAIL ADDRESS" required autocomplete="email">
+                    <button type="submit" class="hover-target">SUBSCRIBE</button>
+                </form>
+            </div>
+            <div class="footer-col links-col">
+                <h3>VERKENNEN</h3>
+                <ul class="footer-links">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="merch.html" class="hover-target">Merch</a></li>
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="magazine.html" class="hover-target">Magazine</a></li>
+                    <li><a href="poku-lobi-club.html" class="hover-target">Poku Lobi Club</a></li>
+                    <li><a href="sync.html" class="hover-target">Sync & Licensing</a></li>
+                    <li><a href="contact.html" class="hover-target">Contact</a></li>
+                </ul>
+                <ul class="footer-links" style="margin-top: 15px;">
+                    <li><a href="faq.html" class="hover-target" style="font-size:12px; font-weight:400;">FAQ</a></li>
+                    <li><a href="privacy.html" class="hover-target" style="font-size:12px; font-weight:400;">Privacy & Voorwaarden</a></li>
+                </ul>
+                <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Traditional Records Sync & Licensing - Licentieer Surinaamse muziek voor film, televisie, reclame en digitale media.">
+    <title>SYNC & LICENSING | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <style>
+        .steps-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin: 50px 0;
+        }
+        .step-box {
+            background: var(--color-card);
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid #1a1a1a;
+        }
+        .step-num {
+            font-size: 48px;
+            font-weight: 800;
+            color: #1e1e1e;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .step-title {
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            color: var(--color-text);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .step-desc { font-size: 13px; color: var(--color-muted); line-height: 1.6; }
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 2px;
+            margin: 30px 0 60px;
+        }
+        .tier-card {
+            background: var(--color-card);
+            border: 1px solid #1a1a1a;
+            padding: 36px 28px;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.3s;
+        }
+        .tier-card:hover { border-color: #333; }
+        .tier-card.featured { border-color: var(--color-accent); }
+        .tier-tag {
+            font-size: 9px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .tier-name {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+        .tier-price {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--color-text);
+            line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: -0.03em;
+        }
+        .tier-price span { font-size: 13px; font-weight: 300; color: var(--color-muted); letter-spacing: 0; }
+        .tier-features { list-style: none; padding: 0; margin: 0 0 28px; flex: 1; }
+        .tier-features li {
+            font-size: 12px;
+            color: var(--color-muted);
+            padding: 6px 0;
+            border-bottom: 1px solid #1a1a1a;
+            line-height: 1.5;
+        }
+        .tier-features li::before { content: "— "; color: var(--color-accent); }
+        .tier-cta {
+            display: block;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid #333;
+            color: var(--color-text);
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            cursor: none;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .tier-cta:hover, .tier-card.featured .tier-cta {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: #fff;
+        }
+        .section-label {
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .sync-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .sync-form-grid .full { grid-column: 1 / -1; }
+        .sync-input {
+            width: 100%;
+            background: transparent;
+            border: 1px solid #2a2a2a;
+            color: var(--color-text);
+            font-family: var(--font-main);
+            font-size: 13px;
+            padding: 14px 16px;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .sync-input:focus { border-color: #555; }
+        .sync-input::placeholder { color: var(--color-muted); }
+        select.sync-input option { background: #111; }
+        @media (max-width: 700px) {
+            .steps-row { grid-template-columns: 1fr; }
+            .sync-form-grid { grid-template-columns: 1fr; }
+            .sync-form-grid .full { grid-column: 1; }
+        }
+        /* Sync Catalog Filter */
+        .sync-catalog-section { margin: 0 0 60px; }
+        .sync-filter-group { margin-bottom: 14px; }
+        .sync-filter-label { font-size: 9px; letter-spacing: 3px; color: var(--color-muted); text-transform: uppercase; margin-bottom: 8px; }
+        .sync-filter-bar { display: flex; flex-wrap: wrap; gap: 6px; }
+        .sync-filter-btn {
+            font-size: 10px; letter-spacing: 2px; font-weight: 700;
+            font-family: var(--font-main); text-transform: uppercase;
+            padding: 7px 14px; background: transparent;
+            border: 1px solid #2a2a2a; color: var(--color-muted);
+            cursor: none; transition: all 0.2s;
+        }
+        .sync-filter-btn:hover { border-color: #555; color: var(--color-text); }
+        .sync-filter-btn.active { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
+        .sync-track-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 2px; margin-top: 24px; }
+        .sync-track-card { background: var(--color-card); border: 1px solid #1a1a1a; padding: 22px 20px; display: flex; flex-direction: column; transition: border-color 0.2s; }
+        .sync-track-card:hover { border-color: #333; }
+        .sync-track-genre { font-size: 9px; letter-spacing: 3px; color: var(--color-accent); font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+        .sync-track-title { font-size: 13px; font-weight: 700; color: var(--color-text); margin-bottom: 4px; line-height: 1.3; }
+        .sync-track-artist { font-size: 11px; color: var(--color-muted); margin-bottom: 14px; }
+        .sync-track-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: auto; }
+        .sync-track-tag { font-size: 9px; letter-spacing: 1px; padding: 3px 7px; border: 1px solid #2a2a2a; color: var(--color-muted); text-transform: uppercase; }
+        .sync-no-results { display: none; text-align: center; padding: 50px; color: var(--color-muted); font-size: 11px; letter-spacing: 3px; }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar scrolled" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target"><img src="logo.png" alt="Traditional Records Logo" width="50" height="50"></a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target active">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main-content" class="page-container" style="max-width: 960px;">
+        <h1 class="section-title">SYNC & LICENSING</h1>
+        <p style="line-height:1.8; text-align:center; color:var(--color-muted); font-size:16px; max-width:600px; margin:0 auto 50px;">Traditional Records beheert een diverse catalogus van Surinaamse erfgoedmuziek. Onze tracks zijn beschikbaar voor film, televisie, reclame en digitale media.</p>
+
+        <p class="section-label">HOE WERKT HET</p>
+        <div class="steps-row">
+            <div class="step-box">
+                <div class="step-num">01</div>
+                <div class="step-title">Blader door de catalogus</div>
+                <p class="step-desc">Verken meer dan 400 tracks — van kaseko en kawina tot dancehall en winti. Filter op genre, sfeer of gebruik.</p>
+            </div>
+            <div class="step-box">
+                <div class="step-num">02</div>
+                <div class="step-title">Kies een licentie</div>
+                <p class="step-desc">Selecteer het licentieniveau dat past bij jouw project — van online creator tot full buyout voor reclame en film.</p>
+            </div>
+            <div class="step-box">
+                <div class="step-num">03</div>
+                <div class="step-title">Ontvang je track</div>
+                <p class="step-desc">Na goedkeuring ontvang je de licentie en het audiobestand direct. Grote projecten verlopen via onze licensing desk.</p>
+            </div>
+        </div>
+
+        <p class="section-label">CATALOGUS</p>
+        <div class="sync-catalog-section">
+            <div class="sync-filter-group">
+                <div class="sync-filter-label">Genre</div>
+                <div class="sync-filter-bar" id="genreFilters">
+                    <button class="sync-filter-btn active" data-filter-genre="all">ALLES</button>
+                    <button class="sync-filter-btn" data-filter-genre="kaseko">KASEKO</button>
+                    <button class="sync-filter-btn" data-filter-genre="kawina">KAWINA</button>
+                    <button class="sync-filter-btn" data-filter-genre="winti">WINTI</button>
+                    <button class="sync-filter-btn" data-filter-genre="dancehall">DANCEHALL</button>
+                    <button class="sync-filter-btn" data-filter-genre="zouk">ZOUK</button>
+                    <button class="sync-filter-btn" data-filter-genre="gospel">GOSPEL</button>
+                </div>
+            </div>
+            <div class="sync-filter-group">
+                <div class="sync-filter-label">Sfeer</div>
+                <div class="sync-filter-bar" id="moodFilters">
+                    <button class="sync-filter-btn active" data-filter-mood="all">ALLES</button>
+                    <button class="sync-filter-btn" data-filter-mood="feestelijk">FEESTELIJK</button>
+                    <button class="sync-filter-btn" data-filter-mood="energiek">ENERGIEK</button>
+                    <button class="sync-filter-btn" data-filter-mood="ritueel">RITUEEL</button>
+                    <button class="sync-filter-btn" data-filter-mood="intiem">INTIEM</button>
+                </div>
+            </div>
+            <div class="sync-track-grid" id="syncCatalogGrid">
+                <div class="sync-track-card" data-genre="kaseko" data-mood="feestelijk" data-tempo="snel">
+                    <div class="sync-track-genre">Kaseko</div>
+                    <div class="sync-track-title">The Best Of</div>
+                    <div class="sync-track-artist">Ewald Krolis</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Feestelijk</span><span class="sync-track-tag">Snel</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="dancehall" data-mood="energiek" data-tempo="snel">
+                    <div class="sync-track-genre">Dancehall</div>
+                    <div class="sync-track-title">Sama Toli</div>
+                    <div class="sync-track-artist">Faja Wowia</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Energiek</span><span class="sync-track-tag">Snel</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="dancehall" data-mood="energiek" data-tempo="snel">
+                    <div class="sync-track-genre">Dancehall</div>
+                    <div class="sync-track-title">Anoa Moo Na Winta</div>
+                    <div class="sync-track-artist">Ghetto Crew</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Energiek</span><span class="sync-track-tag">Snel</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="dancehall" data-mood="energiek" data-tempo="snel">
+                    <div class="sync-track-genre">Dancehall</div>
+                    <div class="sync-track-title">Atoekoeng Peleng</div>
+                    <div class="sync-track-artist">Ghetto Crew</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Energiek</span><span class="sync-track-tag">Snel</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="winti" data-mood="ritueel" data-tempo="medium">
+                    <div class="sync-track-genre">Winti</div>
+                    <div class="sync-track-title">Mi Na Singi Man</div>
+                    <div class="sync-track-artist">MA ES</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Ritueel</span><span class="sync-track-tag">Medium</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="dancehall" data-mood="energiek" data-tempo="snel">
+                    <div class="sync-track-genre">Dancehall</div>
+                    <div class="sync-track-title">The Legend 4 Ever</div>
+                    <div class="sync-track-artist">Papa Touwtjie</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Energiek</span><span class="sync-track-tag">Snel</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="kawina" data-mood="feestelijk" data-tempo="snel">
+                    <div class="sync-track-genre">Kawina</div>
+                    <div class="sync-track-title">Eromé Pawana</div>
+                    <div class="sync-track-artist">Pawana</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Feestelijk</span><span class="sync-track-tag">Snel</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="zouk" data-mood="intiem" data-tempo="langzaam">
+                    <div class="sync-track-genre">Zouk</div>
+                    <div class="sync-track-title">Ondrofeni (Special)</div>
+                    <div class="sync-track-artist">PEP</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Intiem</span><span class="sync-track-tag">Langzaam</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="winti" data-mood="ritueel" data-tempo="medium">
+                    <div class="sync-track-genre">Winti</div>
+                    <div class="sync-track-title">Fodu Yowé</div>
+                    <div class="sync-track-artist">Stimofo</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Ritueel</span><span class="sync-track-tag">Medium</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="winti" data-mood="ritueel" data-tempo="langzaam">
+                    <div class="sync-track-genre">Winti</div>
+                    <div class="sync-track-title">Ma Pete Mama</div>
+                    <div class="sync-track-artist">Stimofo</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Ritueel</span><span class="sync-track-tag">Langzaam</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="kawina" data-mood="feestelijk" data-tempo="snel">
+                    <div class="sync-track-genre">Kawina</div>
+                    <div class="sync-track-title">Hier Is Tam</div>
+                    <div class="sync-track-artist">TAM</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Feestelijk</span><span class="sync-track-tag">Snel</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="gospel" data-mood="intiem" data-tempo="langzaam">
+                    <div class="sync-track-genre">Gospel</div>
+                    <div class="sync-track-title">Wang Gado De</div>
+                    <div class="sync-track-artist">The Messengers</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Intiem</span><span class="sync-track-tag">Langzaam</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="winti" data-mood="ritueel" data-tempo="medium">
+                    <div class="sync-track-genre">Winti</div>
+                    <div class="sync-track-title">Watra Ing</div>
+                    <div class="sync-track-artist">AMSA</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Ritueel</span><span class="sync-track-tag">Medium</span></div>
+                </div>
+                <div class="sync-track-card" data-genre="gospel" data-mood="feestelijk" data-tempo="medium">
+                    <div class="sync-track-genre">Gospel</div>
+                    <div class="sync-track-title">Switi Kerst</div>
+                    <div class="sync-track-artist">Theo Bijlhout</div>
+                    <div class="sync-track-tags"><span class="sync-track-tag">Feestelijk</span><span class="sync-track-tag">Medium</span></div>
+                </div>
+            </div>
+            <div class="sync-no-results" id="syncNoResults">GEEN TRACKS GEVONDEN</div>
+        </div>
+
+        <p class="section-label">LICENTIE TARIEVEN</p>
+        <div class="tiers-grid">
+            <div class="tier-card">
+                <div class="tier-tag">Online creator</div>
+                <div class="tier-name">YouTube / Social</div>
+                <div class="tier-price">€25 <span>/ track</span></div>
+                <ul class="tier-features">
+                    <li>YouTube, Instagram, TikTok</li>
+                    <li>Niet-commercieel gebruik</li>
+                    <li>1 jaar licentie</li>
+                    <li>MP3 320kbps download</li>
+                </ul>
+                <a href="mailto:sync@traditionalrecords.sr?subject=Aanvraag%20YouTube/Social" class="tier-cta hover-target">AANVRAGEN</a>
+            </div>
+            <div class="tier-card featured">
+                <div class="tier-tag">Meest gekozen</div>
+                <div class="tier-name">Commercial Ad</div>
+                <div class="tier-price">€500 <span>/ track</span></div>
+                <ul class="tier-features">
+                    <li>TV- en radiospots</li>
+                    <li>Online advertenties</li>
+                    <li>2 jaar licentie</li>
+                    <li>WAV + MP3 download</li>
+                    <li>Worldwide rechten</li>
+                </ul>
+                <a href="mailto:sync@traditionalrecords.sr?subject=Aanvraag%20Commercial%20Ad" class="tier-cta hover-target">AANVRAGEN</a>
+            </div>
+            <div class="tier-card">
+                <div class="tier-tag">Film & televisie</div>
+                <div class="tier-name">Film / TV</div>
+                <div class="tier-price">Op aanvraag</div>
+                <ul class="tier-features">
+                    <li>Speelfilms & documentaires</li>
+                    <li>Tv-series & streamingplatforms</li>
+                    <li>Festivals & bioscopen</li>
+                    <li>Maatwerk licentieovereenkomst</li>
+                </ul>
+                <a href="#contact-form" class="tier-cta hover-target">CONTACT OPNEMEN</a>
+            </div>
+            <div class="tier-card">
+                <div class="tier-tag">Volledige overname</div>
+                <div class="tier-name">Full Buyout</div>
+                <div class="tier-price">Op aanvraag</div>
+                <ul class="tier-features">
+                    <li>Alle media, alle territorieën</li>
+                    <li>Onbeperkte duur</li>
+                    <li>Exclusiviteitsopties beschikbaar</li>
+                    <li>Inclusief stems op verzoek</li>
+                </ul>
+                <a href="#contact-form" class="tier-cta hover-target">CONTACT OPNEMEN</a>
+            </div>
+        </div>
+
+        <div class="sync-box" id="contact-form">
+            <h3 style="color:#fff; font-size:13px; letter-spacing:3px; margin-bottom:8px;">LICENTIE AANVRAAG</h3>
+            <p style="color:var(--color-muted); font-size:13px; margin-bottom:30px;">Stuur ons een bericht of mail direct naar <a href="mailto:sync@traditionalrecords.sr" class="hover-target" style="color:var(--color-text); border-bottom:1px solid var(--color-accent); padding-bottom:1px;">sync@traditionalrecords.sr</a></p>
+            <form class="sync-form-grid" id="syncForm" action="https://formspree.io/f/mlgpblwo" method="POST" aria-label="Licentie aanvraag formulier">
+                <input type="hidden" name="_subject" value="Sync & Licensing Aanvraag — Traditional Records">
+                <div>
+                    <label for="sync-name" class="sr-only">Naam</label>
+                    <input type="text" id="sync-name" class="sync-input" placeholder="NAAM" required autocomplete="name">
+                </div>
+                <div>
+                    <label for="sync-email" class="sr-only">E-mail</label>
+                    <input type="email" id="sync-email" class="sync-input" placeholder="EMAIL" required autocomplete="email">
+                </div>
+                <div>
+                    <label for="sync-company" class="sr-only">Bedrijf</label>
+                    <input type="text" id="sync-company" class="sync-input" placeholder="BEDRIJF / PRODUCTIE">
+                </div>
+                <div>
+                    <label for="sync-type" class="sr-only">Type gebruik</label>
+                    <select id="sync-type" class="sync-input">
+                        <option value="" disabled selected>TYPE GEBRUIK</option>
+                        <option>YouTube / Social Media</option>
+                        <option>Commercial Ad</option>
+                        <option>Film / Documentaire</option>
+                        <option>TV-serie / Streaming</option>
+                        <option>Full Buyout</option>
+                        <option>Anders</option>
+                    </select>
+                </div>
+                <div class="full">
+                    <label for="sync-message" class="sr-only">Projectomschrijving</label>
+                    <textarea id="sync-message" class="sync-input" rows="4" placeholder="PROJECTOMSCHRIJVING — welke track, voor welk gebruik?" style="resize:vertical;"></textarea>
+                </div>
+                <div class="full">
+                    <button type="submit" class="action-btn hover-target" style="width:100%;">AANVRAAG VERSTUREN</button>
+                </div>
+            </form>
+            <div id="syncSuccess" style="display:none; padding:30px; text-align:center;">
+                <p style="font-size:13px; letter-spacing:3px; color:var(--color-text);">AANVRAAG ONTVANGEN</p>
+                <p style="color:var(--color-muted); font-size:13px; margin-top:10px;">We nemen binnen 2 werkdagen contact op.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-col brand-col">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="120" height="120">
+                <address>TRADITIONAL RECORDS HQ<br>Waterkant 12, Paramaribo<br><a href="mailto:info@traditionalrecords.sr" class="hover-target">info@traditionalrecords.sr</a></address>
+            </div>
+            <div class="footer-col newsletter-col">
+                <h3>THE NEWSLETTER</h3>
+                <p>Join the inner circle.</p>
+                <form class="newsletter-form" aria-label="Nieuwsbrief aanmelding">
+                    <label for="newsletter-email-sync" class="sr-only">E-mailadres</label>
+                    <input type="email" id="newsletter-email-sync" placeholder="EMAIL ADDRESS" required autocomplete="email">
+                    <button type="submit" class="hover-target">SUBSCRIBE</button>
+                </form>
+            </div>
+            <div class="footer-col links-col">
+                <h3>VERKENNEN</h3>
+                <ul class="footer-links">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="merch.html" class="hover-target">Merch</a></li>
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="magazine.html" class="hover-target">Magazine</a></li>
+                    <li><a href="poku-lobi-club.html" class="hover-target">Poku Lobi Club</a></li>
+                    <li><a href="sync.html" class="hover-target">Sync & Licensing</a></li>
+                    <li><a href="contact.html" class="hover-target">Contact</a></li>
+                </ul>
+                <ul class="footer-links" style="margin-top: 15px;">
+                    <li><a href="faq.html" class="hover-target" style="font-size:12px; font-weight:400;">FAQ</a></li>
+                    <li><a href="privacy.html" class="hover-target" style="font-size:12px; font-weight:400;">Privacy & Voorwaarden</a></li>
+                </ul>
+                <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // Sync catalog filter
+    (function() {
+        let activeGenre = 'all', activeMood = 'all';
+        function applyFilters() {
+            const cards = document.querySelectorAll('#syncCatalogGrid .sync-track-card');
+            let visible = 0;
+            cards.forEach(card => {
+                const genreMatch = activeGenre === 'all' || card.dataset.genre === activeGenre;
+                const moodMatch = activeMood === 'all' || card.dataset.mood === activeMood;
+                if (genreMatch && moodMatch) { card.hidden = false; visible++; }
+                else card.hidden = true;
+            });
+            const noResults = document.getElementById('syncNoResults');
+            if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+        }
+        document.querySelectorAll('#genreFilters .sync-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#genreFilters .sync-filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeGenre = btn.dataset.filterGenre;
+                applyFilters();
+            });
+        });
+        document.querySelectorAll('#moodFilters .sync-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#moodFilters .sync-filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeMood = btn.dataset.filterMood;
+                applyFilters();
+            });
+        });
+    })();
+
+    document.getElementById('syncForm')?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('[type=submit]');
+        btn.textContent = 'VERSTUREN...';
+        btn.disabled = true;
+        try {
+            const res = await fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+                this.style.display = 'none';
+                document.getElementById('syncSuccess').style.display = 'block';
+            } else {
+                btn.textContent = 'PROBEER OPNIEUW';
+                btn.disabled = false;
+                alert('Er ging iets mis. Mail ons direct op sync@traditionalrecords.sr');
+            }
+        } catch {
+            btn.textContent = 'PROBEER OPNIEUW';
+            btn.disabled = false;
+        }
+    });
+    </script>
+</body>
+</html>

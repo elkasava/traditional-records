@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Traditional Records Singles Club — maandelijks exclusief vinyl, direct van het label naar jouw deur.">
+    <title>SINGLES CLUB | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <style>
+        /* ---- HERO ---- */
+        .sc-hero {
+            background: #000;
+            padding: 160px 6% 100px;
+            text-align: center;
+            border-bottom: 1px solid #111;
+            position: relative;
+            overflow: hidden;
+        }
+        .sc-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(255,68,0,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .sc-label {
+            font-size: 9px;
+            letter-spacing: 4px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+            display: block;
+        }
+        .sc-hero h1 {
+            font-size: clamp(3.5rem, 10vw, 9rem);
+            font-weight: 800;
+            line-height: 0.88;
+            letter-spacing: -0.04em;
+            margin: 0 0 30px;
+        }
+        .sc-hero h1 em {
+            display: block;
+            font-style: italic;
+            font-weight: 200;
+            color: #888;
+            font-size: 0.55em;
+            letter-spacing: -0.02em;
+        }
+        .sc-hero-sub {
+            font-size: 16px;
+            color: #aaa;
+            font-weight: 300;
+            max-width: 480px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+        }
+        .sc-cta-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .sc-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: var(--color-accent);
+            color: #fff;
+            font-family: var(--font-main);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            cursor: none;
+        }
+        .sc-cta-primary:hover { opacity: 0.85; }
+        .sc-cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            padding: 16px 28px;
+            border: 1px solid #2a2a2a;
+            color: #aaa;
+            font-family: var(--font-main);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: border-color 0.2s, color 0.2s;
+            cursor: none;
+        }
+        .sc-cta-secondary:hover { border-color: #555; color: #fff; }
+
+        /* ---- HOW IT WORKS ---- */
+        .sc-section { padding: 100px 6%; max-width: 1200px; margin: 0 auto; }
+        .sc-section-label {
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: var(--color-accent);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .sc-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2px;
+        }
+        .sc-step {
+            background: var(--color-card);
+            border: 1px solid #111;
+            padding: 40px 32px;
+        }
+        .sc-step-num {
+            font-size: 64px;
+            font-weight: 800;
+            color: #161616;
+            line-height: 1;
+            margin-bottom: 24px;
+        }
+        .sc-step-title {
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-text);
+            margin-bottom: 10px;
+        }
+        .sc-step-desc { font-size: 13px; color: var(--color-muted); line-height: 1.7; }
+
+        /* ---- TIERS ---- */
+        .sc-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2px;
+            margin-top: 0;
+        }
+        .sc-tier {
+            background: var(--color-card);
+            border: 1px solid #111;
+            padding: 44px 36px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: border-color 0.2s;
+        }
+        .sc-tier:hover { border-color: #2a2a2a; }
+        .sc-tier.featured { border-color: var(--color-accent); }
+        .sc-tier-badge {
+            position: absolute;
+            top: -1px; right: 24px;
+            background: var(--color-accent);
+            color: #fff;
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+        }
+        .sc-tier-name {
+            font-size: 10px;
+            letter-spacing: 3px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            margin-bottom: 16px;
+        }
+        .sc-tier-price {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 6px;
+        }
+        .sc-tier-period {
+            font-size: 11px;
+            color: var(--color-muted);
+            margin-bottom: 32px;
+            letter-spacing: 1px;
+        }
+        .sc-tier-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 36px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .sc-tier-features li {
+            font-size: 13px;
+            color: #ccc;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+        .sc-tier-features li::before {
+            content: '—';
+            color: var(--color-accent);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .sc-tier-btn {
+            display: block;
+            text-align: center;
+            padding: 14px 20px;
+            font-family: var(--font-main);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid #2a2a2a;
+            color: var(--color-text);
+            background: transparent;
+            transition: border-color 0.2s, background 0.2s;
+            cursor: none;
+        }
+        .sc-tier-btn:hover { border-color: #555; background: #111; }
+        .sc-tier.featured .sc-tier-btn {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: #fff;
+        }
+        .sc-tier.featured .sc-tier-btn:hover { opacity: 0.85; }
+
+        /* ---- SIGNUP FORM ---- */
+        .sc-form-wrap {
+            background: var(--color-card);
+            border: 1px solid #1a1a1a;
+            padding: 60px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .sc-form-title {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin: 0 0 8px;
+        }
+        .sc-form-sub {
+            font-size: 13px;
+            color: var(--color-muted);
+            margin: 0 0 40px;
+            letter-spacing: 1px;
+        }
+        .sc-form { display: flex; flex-direction: column; gap: 12px; }
+        .sc-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .sc-form input,
+        .sc-form select {
+            width: 100%;
+            padding: 14px 16px;
+            background: #0a0a0a;
+            border: 1px solid #1e1e1e;
+            color: var(--color-text);
+            font-family: var(--font-main);
+            font-size: 13px;
+            letter-spacing: 1px;
+            outline: none;
+            transition: border-color 0.2s;
+            -webkit-appearance: none;
+        }
+        .sc-form input:focus,
+        .sc-form select:focus { border-color: #444; }
+        .sc-form select option { background: #0f0f0f; }
+        .sc-form-submit {
+            padding: 16px 32px;
+            background: var(--color-accent);
+            color: #fff;
+            border: none;
+            font-family: var(--font-main);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: none;
+            transition: opacity 0.2s;
+            margin-top: 8px;
+        }
+        .sc-form-submit:hover { opacity: 0.85; }
+        .sc-form-note {
+            font-size: 11px;
+            color: #555;
+            letter-spacing: 1px;
+            margin-top: 8px;
+            text-align: center;
+        }
+        .sc-success {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+        .sc-success-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .sc-success h3 {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin: 0 0 8px;
+        }
+        .sc-success p { font-size: 14px; color: var(--color-muted); margin: 0; }
+
+        /* ---- FAQ ---- */
+        .sc-faq { display: flex; flex-direction: column; gap: 2px; }
+        .sc-faq-item {
+            background: var(--color-card);
+            border: 1px solid #111;
+        }
+        .sc-faq-q {
+            width: 100%;
+            padding: 20px 24px;
+            text-align: left;
+            font-family: var(--font-main);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--color-text);
+            background: transparent;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: none;
+            transition: color 0.2s;
+        }
+        .sc-faq-q:hover { color: #fff; }
+        .sc-faq-q svg { flex-shrink: 0; transition: transform 0.3s; }
+        .sc-faq-item.open .sc-faq-q svg { transform: rotate(45deg); }
+        .sc-faq-a {
+            display: none;
+            padding: 0 24px 20px;
+            font-size: 13px;
+            color: var(--color-muted);
+            line-height: 1.7;
+        }
+        .sc-faq-item.open .sc-faq-a { display: block; }
+
+        @media (max-width: 700px) {
+            .sc-form-row { grid-template-columns: 1fr; }
+            .sc-form-wrap { padding: 36px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar scrolled" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target">
+                <img src="logo.png" alt="Traditional Records Logo" width="50" height="50">
+            </a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+        <div class="nav-actions">
+            <button id="openCartBtn" class="icon-link cart-link hover-target" aria-label="Winkelwagen openen" type="button">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span id="cartCountBadge" class="cart-count" aria-live="polite">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+
+        <!-- HERO -->
+        <section class="sc-hero">
+            <span class="sc-label">Traditional Records</span>
+            <h1>SINGLES<br><em>Club</em></h1>
+            <p class="sc-hero-sub">Elke maand een exclusieve vinylpersing — rechtstreeks van het label naar jouw deur. Surinaams erfgoed, op plaat.</p>
+            <div class="sc-cta-row">
+                <a href="#aanmelden" class="sc-cta-primary hover-target">
+                    Word lid
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+                <a href="#tiers" class="sc-cta-secondary hover-target">Bekijk abonnementen</a>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="sc-section">
+            <p class="sc-section-label">Hoe het werkt</p>
+            <div class="sc-steps">
+                <div class="sc-step">
+                    <div class="sc-step-num">01</div>
+                    <p class="sc-step-title">Kies je abonnement</p>
+                    <p class="sc-step-desc">Selecteer het pakket dat bij jou past — van one-track singles tot full album pressings met exclusief artwork.</p>
+                </div>
+                <div class="sc-step">
+                    <div class="sc-step-num">02</div>
+                    <p class="sc-step-title">Wij selecteren voor jou</p>
+                    <p class="sc-step-desc">Elke maand kiezen onze curatoren een exclusieve persing uit ons archief — of een splinternieuwe release die nog niet te koop is.</p>
+                </div>
+                <div class="sc-step">
+                    <div class="sc-step-num">03</div>
+                    <p class="sc-step-title">Rechtstreeks bezorgd</p>
+                    <p class="sc-step-desc">In handverpakte slagvaste envelop, worldwide shipping. Inclusief liner notes en de verhalen achter de muziek.</p>
+                </div>
+                <div class="sc-step">
+                    <div class="sc-step-num">04</div>
+                    <p class="sc-step-title">Leden-exclusieven</p>
+                    <p class="sc-step-desc">Toegang tot vroeg-release streams, het archief-portaal, en kortingen in de shop. Cancel wanneer je wilt.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIERS -->
+        <section class="sc-section" id="tiers" style="padding-top:0;">
+            <p class="sc-section-label">Abonnementen</p>
+            <div class="sc-tiers">
+                <div class="sc-tier">
+                    <p class="sc-tier-name">Starter</p>
+                    <p class="sc-tier-price">€12</p>
+                    <p class="sc-tier-period">per maand</p>
+                    <ul class="sc-tier-features">
+                        <li>1 x 7" single per maand</li>
+                        <li>Gelimiteerde oplage</li>
+                        <li>Genummerd & gesigneerd artwork</li>
+                        <li>Digitale liner notes</li>
+                        <li>10% korting in de shop</li>
+                    </ul>
+                    <a href="#aanmelden" class="sc-tier-btn hover-target">Aanmelden</a>
+                </div>
+                <div class="sc-tier featured">
+                    <span class="sc-tier-badge">Meest populair</span>
+                    <p class="sc-tier-name">Heritage</p>
+                    <p class="sc-tier-price">€24</p>
+                    <p class="sc-tier-period">per maand</p>
+                    <ul class="sc-tier-features">
+                        <li>1 x 12" LP per maand</li>
+                        <li>Genummerde eerste persing</li>
+                        <li>Exclusief artwork + foto's</li>
+                        <li>Uitgebreide liner notes (NL/EN)</li>
+                        <li>Vroeg toegang tot nieuwe releases</li>
+                        <li>15% korting in de shop</li>
+                        <li>Leden-archief toegang</li>
+                    </ul>
+                    <a href="#aanmelden" class="sc-tier-btn hover-target">Aanmelden</a>
+                </div>
+                <div class="sc-tier">
+                    <p class="sc-tier-name">Collector</p>
+                    <p class="sc-tier-price">€45</p>
+                    <p class="sc-tier-period">per maand</p>
+                    <ul class="sc-tier-features">
+                        <li>2 x 12" LP per maand</li>
+                        <li>Coloured vinyl — exclusief voor leden</li>
+                        <li>Gesigneerde sleeve</li>
+                        <li>Fysiek magazine editie</li>
+                        <li>Backstage uitnodigingen</li>
+                        <li>20% korting in de shop</li>
+                        <li>Direct line naar het label</li>
+                    </ul>
+                    <a href="#aanmelden" class="sc-tier-btn hover-target">Aanmelden</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIGNUP FORM -->
+        <section class="sc-section" id="aanmelden" style="padding-top:0; padding-bottom:120px;">
+            <p class="sc-section-label">Aanmelden</p>
+            <div class="sc-form-wrap">
+                <h2 class="sc-form-title">Word lid van<br>de club.</h2>
+                <p class="sc-form-sub">Vul je gegevens in — we nemen contact op zodra inschrijving open gaat.</p>
+                <div id="scFormContainer">
+                    <form class="sc-form" id="scSignupForm" action="https://formspree.io/f/xyzabcde" method="POST" novalidate>
+                        <input type="hidden" name="_subject" value="Singles Club Aanmelding">
+                        <div class="sc-form-row">
+                            <input type="text"  name="voornaam"   placeholder="VOORNAAM"          required autocomplete="given-name">
+                            <input type="text"  name="achternaam" placeholder="ACHTERNAAM"         required autocomplete="family-name">
+                        </div>
+                        <input type="email"     name="email"      placeholder="E-MAILADRES"        required autocomplete="email">
+                        <input type="text"      name="land"       placeholder="LAND / REGIO"       autocomplete="country-name">
+                        <select name="abonnement">
+                            <option value="" disabled selected>KIES ABONNEMENT</option>
+                            <option value="starter">Starter — €12/mnd (7" single)</option>
+                            <option value="heritage">Heritage — €24/mnd (12" LP)</option>
+                            <option value="collector">Collector — €45/mnd (2x LP + extras)</option>
+                        </select>
+                        <button type="submit" class="sc-form-submit hover-target">Aanmelding versturen</button>
+                        <p class="sc-form-note">Geen betaling vereist bij aanmelding. We bevestigen per e-mail.</p>
+                    </form>
+                </div>
+                <div class="sc-success" id="scSuccess">
+                    <div class="sc-success-icon">✦</div>
+                    <h3>Aanmelding ontvangen.</h3>
+                    <p>We nemen snel contact op met alle details.<br>Welkom in de club.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="sc-section" style="padding-top:0; padding-bottom:120px;">
+            <p class="sc-section-label">Veelgestelde vragen</p>
+            <div class="sc-faq" id="scFaq">
+                <div class="sc-faq-item">
+                    <button class="sc-faq-q hover-target" type="button">
+                        Kan ik mijn abonnement op elk moment opzeggen?
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <p class="sc-faq-a">Ja. Je kunt op elk moment per e-mail opzeggen. Je ontvangt nog je lopende maand-persing, daarna wordt niets meer in rekening gebracht.</p>
+                </div>
+                <div class="sc-faq-item">
+                    <button class="sc-faq-q hover-target" type="button">
+                        Leveren jullie wereldwijd?
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <p class="sc-faq-a">Ja — we sturen naar Nederland, België, Suriname, de Caraïben en internationaal. Verzendkosten worden berekend op basis van jouw regio.</p>
+                </div>
+                <div class="sc-faq-item">
+                    <button class="sc-faq-q hover-target" type="button">
+                        Zijn de persingen echt exclusief voor leden?
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <p class="sc-faq-a">Ja. De maandelijkse clubpersingen worden nooit breed verkocht. Sommige komen later beperkt in de shop, maar in kleinere aantallen en zonder de originele verpakking.</p>
+                </div>
+                <div class="sc-faq-item">
+                    <button class="sc-faq-q hover-target" type="button">
+                        Wanneer gaat de club van start?
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <p class="sc-faq-a">We lanceren zodra we de eerste 100 leden hebben. Meld je aan om op de hoogte te blijven en zeker een plek te reserveren.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="60" height="60">
+                <p class="footer-tagline">Surinaamse erfgoedmuziek.<br>Wereldwijd gedeeld.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4 class="footer-links-title">Navigatie</h4>
+                <ul class="footer-links-list">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="singles-club.html" class="hover-target">Singles Club</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+        </div>
+    </footer>
+
+    <script>
+    // FAQ accordion
+    document.getElementById('scFaq')?.querySelectorAll('.sc-faq-q').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.sc-faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.sc-faq-item').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        });
+    });
+
+    // Form — show success on submit (real send handled by Formspree)
+    document.getElementById('scSignupForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const data = new FormData(form);
+        try {
+            const res = await fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+                form.closest('#scFormContainer').style.display = 'none';
+                document.getElementById('scSuccess').style.display = 'block';
+            } else {
+                alert('Er ging iets mis. Probeer opnieuw of mail ons direct.');
+            }
+        } catch {
+            alert('Verbinding mislukt. Probeer opnieuw.');
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Over Traditional Records - Het verhaal achter Suriname's toonaangevende heritage platenlabel. Sinds 2025 bewaren en delen wij de Surinaamse muzikale erfgoed.">
+    <meta property="og:title" content="Over Ons | Traditional Records">
+    <meta property="og:description" content="Het verhaal achter Suriname's toonaangevende heritage platenlabel.">
+    <meta property="og:type" content="website">
+    <title>OVER ONS | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <style>
+        .about-hero {
+            background: #000;
+            padding: 160px 5% 80px;
+            border-bottom: 1px solid #1a1a1a;
+            text-align: center;
+        }
+        .about-hero h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 800;
+            line-height: 0.9;
+            color: #fff;
+            margin: 0 0 30px;
+            letter-spacing: -0.04em;
+        }
+        .about-hero h1 span {
+            display: block;
+            font-weight: 200;
+            font-style: italic;
+            font-size: 0.5em;
+            letter-spacing: -0.02em;
+            color: #888;
+        }
+        .about-hero .subtitle {
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 5%;
+        }
+        .about-block {
+            margin-bottom: 80px;
+        }
+        .about-block h2 {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        .about-block p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        .about-block p.lead {
+            font-size: 24px;
+            font-weight: 300;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: #222;
+            border: 1px solid #222;
+            margin: 80px 0;
+        }
+        .stat-item {
+            background: var(--color-card);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: #fff;
+            display: block;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: #222;
+            border: 1px solid #222;
+            margin-top: 40px;
+        }
+        .value-card {
+            background: var(--color-card);
+            padding: 40px 30px;
+        }
+        .value-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 15px;
+        }
+        .value-card p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #888;
+            margin: 0;
+        }
+
+        .team-section {
+            padding: 100px 5%;
+            border-top: 1px solid #1a1a1a;
+        }
+        .team-section h2 {
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .team-member h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 5px;
+        }
+        .team-member p {
+            font-size: 12px;
+            color: #666;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .cta-banner {
+            border-top: 1px solid #1a1a1a;
+            padding: 80px 5%;
+            text-align: center;
+        }
+        .cta-banner h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 20px;
+        }
+        .cta-banner p {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+        .cta-banner .action-btn {
+            display: inline-flex;
+        }
+
+        /* THE STORY */
+        .story-pullquote {
+            font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+            font-weight: 300;
+            font-style: italic;
+            color: #fff;
+            line-height: 1.45;
+            letter-spacing: -0.02em;
+            border-left: 2px solid var(--color-accent);
+            padding-left: 28px;
+            margin: 0 0 50px;
+        }
+        .story-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .story-text p { font-size: 15px; line-height: 1.9; color: #999; margin-bottom: 18px; }
+        .story-timeline { display: flex; flex-direction: column; }
+        .story-milestone {
+            display: grid;
+            grid-template-columns: 55px 1fr;
+            gap: 20px;
+            padding: 18px 0;
+            border-bottom: 1px solid #111;
+        }
+        .story-milestone:last-child { border-bottom: none; }
+        .story-milestone-year { font-size: 10px; font-weight: 800; color: var(--color-accent); letter-spacing: 1px; padding-top: 2px; }
+        .story-milestone-text { font-size: 13px; color: #888; line-height: 1.6; }
+        .story-milestone-text strong { color: #ccc; font-weight: 700; }
+
+        /* HERITAGE SECTION */
+        .heritage-section {
+            background: #050505;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+            padding: 100px 5%;
+        }
+        .heritage-inner { max-width: 900px; margin: 0 auto; }
+        .heritage-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+            align-items: start;
+        }
+        .heritage-heading {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            margin: 0;
+        }
+        .heritage-heading em {
+            font-style: italic;
+            font-weight: 200;
+            color: #555;
+            display: block;
+            font-size: 0.5em;
+            letter-spacing: -0.01em;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .heritage-desc { font-size: 14px; line-height: 1.85; color: #888; font-weight: 300; }
+        .heritage-desc strong { color: #bbb; font-weight: 600; }
+        .heritage-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+        .heritage-badge { font-size: 9px; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; padding: 5px 12px; border: 1px solid #222; color: #555; }
+        .heritage-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 2px; }
+        .heritage-card { background: var(--color-card); border: 1px solid #1a1a1a; padding: 28px 22px; }
+        .heritage-card-label { font-size: 9px; letter-spacing: 3px; color: var(--color-accent); font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+        .heritage-card-title { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+        .heritage-card-desc { font-size: 12px; color: #666; line-height: 1.7; }
+
+        @media (max-width: 900px) {
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .values-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; gap: 30px; }
+            .story-body { grid-template-columns: 1fr; gap: 40px; }
+            .heritage-intro { grid-template-columns: 1fr; gap: 30px; }
+        }
+        @media (max-width: 480px) {
+            .stats-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar scrolled" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target"><img src="logo.png" alt="Traditional Records Logo" width="50" height="50"></a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target active">OVER ONS</a></li>
+            </ul>
+        </div>
+        <div class="nav-actions">
+            <button id="openCartBtn" class="icon-link cart-link hover-target" aria-label="Winkelwagen openen" type="button">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span id="cartCountBadge" class="cart-count" aria-live="polite">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <div class="about-hero">
+            <p class="subtitle">EST. 2025 // PARAMARIBO, SURINAME</p>
+            <h1><span>Ons</span>VERHAAL</h1>
+        </div>
+
+        <div class="about-content">
+            <div class="about-block">
+                <h2>MISSIE</h2>
+                <p class="lead">Traditional Records is opgericht met één doel: het bewaren, koesteren en wereldwijd delen van de rijke muzikale erfgoed van Suriname.</p>
+                <p>Van de hypnotiserende ritmes van Winti tot de energieke klanken van Kaseko, van de diepe grooves van Kawina tot de spirituele melodieën van Gospel — wij geloven dat deze muziek niet verloren mag gaan. Elke plaat die wij uitbrengen is een brug tussen verleden en heden, tussen Suriname en de wereld.</p>
+            </div>
+
+            <div class="about-block">
+                <h2>WAT WIJ DOEN</h2>
+                <p>Als platenlabel en publishing bedrijf richten wij ons op het herontdekken, restaureren en opnieuw uitbrengen van klassieke Surinaamse opnames. Daarnaast werken wij samen met hedendaagse artiesten die de traditionele genres nieuw leven inblazen.</p>
+                <p>Onze catalogus omvat vinyl, CD, cassette en digitale releases. Wij zorgen ervoor dat elke release met de hoogste kwaliteit wordt geproduceerd — van de audio-mastering tot het artwork.</p>
+            </div>
+
+            <div class="about-block">
+                <h2>HET VERHAAL</h2>
+                <blockquote class="story-pullquote">"Ik had een kist vol banden gevonden — opnames van artiesten die niemand meer kende. Toen wist ik: dit kon niet verloren gaan."</blockquote>
+                <div class="story-body">
+                    <div class="story-text">
+                        <p>Traditional Records begon niet als een businessplan. Het begon met een obsessie — de overtuiging dat de rijkste muzikale tradities van Suriname dreigden te verdwijnen in de anonimiteit van privé-archieven, verouderde cassettebanden en vergeten keerspelers.</p>
+                        <p>In 2024 werden de eerste contacten gelegd met Surinaamse artiesten en rechtenhouders. De gesprekken die volgden waren geen zakelijke onderhandelingen — het waren culturele missies. Artiesten die al jaren wachtten op iemand die hun muziek serieus nam. Families die schat bewakers waren van tientallen jaren aan niet-uitgebracht materiaal.</p>
+                        <p>In 2025 opende Traditional Records officieel zijn deuren in Paramaribo. Met één doel: een brug bouwen tussen het rijke muzikale verleden van Suriname en een wereldwijd publiek dat klaar is om te luisteren.</p>
+                    </div>
+                    <div class="story-timeline">
+                        <div class="story-milestone">
+                            <span class="story-milestone-year">2024</span>
+                            <p class="story-milestone-text"><strong>Eerste contacten</strong> — gesprekken met Surinaamse artiesten en rechtenhouders in Nederland en Paramaribo.</p>
+                        </div>
+                        <div class="story-milestone">
+                            <span class="story-milestone-year">2024</span>
+                            <p class="story-milestone-text"><strong>Archief-onderzoek</strong> — meer dan 400 opnames geïnventariseerd, gedigitaliseerd en geclassificeerd.</p>
+                        </div>
+                        <div class="story-milestone">
+                            <span class="story-milestone-year">2025</span>
+                            <p class="story-milestone-text"><strong>Oprichting</strong> — Traditional Records officieel opgericht in Paramaribo. Eerste persingen besteld.</p>
+                        </div>
+                        <div class="story-milestone">
+                            <span class="story-milestone-year">2025</span>
+                            <p class="story-milestone-text"><strong>Eerste releases</strong> — Stimofo, Pawana en Faja Wowia openen de catalogus met remastered klassiekers.</p>
+                        </div>
+                        <div class="story-milestone">
+                            <span class="story-milestone-year">2026</span>
+                            <p class="story-milestone-text"><strong>Nu</strong> — 17+ releases, 14 artiesten, 7 genres. En we zijn nog maar net begonnen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-item">
+                    <span class="stat-number">17+</span>
+                    <span class="stat-label">Releases</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">14</span>
+                    <span class="stat-label">Artiesten</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">7</span>
+                    <span class="stat-label">Genres</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">&#x1F30D;</span>
+                    <span class="stat-label">Worldwide Shipping</span>
+                </div>
+            </div>
+
+            <div class="about-block">
+                <h2>PUBLISHING & SYNC</h2>
+                <p>Naast onze releases beheren wij de publishing rechten van ons groeiende catalogus. Onze muziek is beschikbaar voor synchronisatie in film, televisie, reclame en digitale media. Wij werken samen met muzieksupervisors wereldwijd om de unieke klanken van Suriname in nieuwe contexten te plaatsen.</p>
+            </div>
+
+            <div class="about-block">
+                <h2>ONZE WAARDEN</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <h3>ERFGOED</h3>
+                        <p>Wij behandelen elke opname als een cultureel erfstuk. Restauratie en preservatie staan centraal in ons werk.</p>
+                    </div>
+                    <div class="value-card">
+                        <h3>KWALITEIT</h3>
+                        <p>Van 180-gram vinyl pressings tot high-fidelity digitale masters — wij leveren alleen de hoogste audiokwaliteit.</p>
+                    </div>
+                    <div class="value-card">
+                        <h3>GEMEENSCHAP</h3>
+                        <p>Wij investeren in de Surinaamse muziekgemeenschap en zorgen ervoor dat artiesten eerlijk worden gecompenseerd.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="heritage-section">
+            <div class="heritage-inner">
+                <h2 style="font-size:10px;letter-spacing:4px;color:var(--color-accent);text-transform:uppercase;font-weight:700;margin-bottom:40px;">Culturele Betekenis</h2>
+                <div class="heritage-intro">
+                    <h3 class="heritage-heading">
+                        <em>Immaterieel erfgoed van</em>
+                        SURINAME
+                    </h3>
+                    <div>
+                        <p class="heritage-desc">De muzikale tradities die Traditional Records bewaart zijn meer dan entertainment — het zijn levende uitdrukkingen van menselijke cultuur. <strong>Winti, Kaseko, Kawina en Bazijn</strong> vertegenwoordigen eeuwen van culturele synthese: West-Afrikaanse tradities, Europese invloeden, Inheemse Surinaamse elementen en Aziatische migratiegolven, samengekomen in een unieke muzikale taal.</p>
+                        <p class="heritage-desc" style="margin-top:14px;">Conform de UNESCO Conventie voor de Bescherming van Immaterieel Cultureel Erfgoed (2003) zijn deze genres dragers van gemeenschapsidentiteit, intergenerationele kennis en culturele continuïteit. Traditional Records werkt samen met culturele organisaties om deze tradities actief te bewaren — niet als museum stukken, maar als levende muziek voor nieuwe generaties.</p>
+                        <div class="heritage-badges">
+                            <span class="heritage-badge">UNESCO 2003 Conventie</span>
+                            <span class="heritage-badge">Immaterieel Erfgoed</span>
+                            <span class="heritage-badge">Diaspora Cultuur</span>
+                            <span class="heritage-badge">Archief & Preservatie</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="heritage-grid">
+                    <div class="heritage-card">
+                        <p class="heritage-card-label">Winti</p>
+                        <p class="heritage-card-title">Spiritueel Erfgoed</p>
+                        <p class="heritage-card-desc">Geworteld in West-Afrikaanse religie en obia-tradities. Winti-muziek is een rituele taal die verbinding zoekt met vooroudergeesten en de kracht van natuur.</p>
+                    </div>
+                    <div class="heritage-card">
+                        <p class="heritage-card-label">Kaseko</p>
+                        <p class="heritage-card-title">Volkserfgoed</p>
+                        <p class="heritage-card-desc">Symbool van de multiculturaliteit van Paramaribo. Kaseko versmelt Afrikaanse, Europese en Caraïbische elementen tot een onmiskenbaar Surinaams geluid.</p>
+                    </div>
+                    <div class="heritage-card">
+                        <p class="heritage-card-label">Kawina</p>
+                        <p class="heritage-card-title">Gemeenschapserfgoed</p>
+                        <p class="heritage-card-desc">Levend erfgoed van de Surinaams-Javaanse gemeenschap. Op bruiloften en dorpsfeesten verbindt Kawina generaties in dans en gezang.</p>
+                    </div>
+                    <div class="heritage-card">
+                        <p class="heritage-card-label">Bazijn / Gospel</p>
+                        <p class="heritage-card-title">Kerkelijk Erfgoed</p>
+                        <p class="heritage-card-desc">Voortgekomen uit de Moravische zending van de 18e en 19e eeuw. Bazijn combineert Europese koortradities met Afro-Surinaamse ritmes tot een uniek geestelijk geluid.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2>HET TEAM</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <h3>DIRECTIE</h3>
+                    <p>Label Management</p>
+                </div>
+                <div class="team-member">
+                    <h3>A&R</h3>
+                    <p>Artists & Repertoire</p>
+                </div>
+                <div class="team-member">
+                    <h3>PUBLISHING</h3>
+                    <p>Rights & Licensing</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-banner">
+            <h2>MUZIEK INSTUREN?</h2>
+            <p>Ben je een artiest en wil je samenwerken met Traditional Records? Neem contact op met ons A&R team.</p>
+            <a href="contact.html" class="action-btn hover-target">NEEM CONTACT OP</a>
+        </div>
+    </main>
+
+    <div id="cartModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Winkelwagen">
+        <div class="modal-content cart-content">
+            <div class="cart-title">WINKELWAGEN <button class="close-modal close-cart hover-target" aria-label="Sluiten" type="button">&times;</button></div>
+            <div id="cartItemsContainer" class="cart-items-container"></div>
+            <div class="cart-footer">
+                <div class="cart-total-row"><span>TOTAAL</span><span id="cartTotalPrice" aria-live="polite">&euro;0.00</span></div>
+                <button class="action-btn checkout-btn hover-target" type="button">AFREKENEN</button>
+                <button class="continue-btn hover-target" id="continueShopping" type="button">VERDER WINKELEN</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-col brand-col">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="120" height="120">
+                <address>TRADITIONAL RECORDS HQ<br>Waterkant 12, Paramaribo<br><a href="mailto:info@traditionalrecords.sr" class="hover-target">info@traditionalrecords.sr</a></address>
+                <div class="social-icons">
+                    <a href="https://instagram.com/traditionalrecords" target="_blank" rel="noopener" class="hover-target" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://open.spotify.com/search/Traditional%20Records%20Suriname" target="_blank" rel="noopener" class="hover-target" aria-label="Spotify"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8 11.5c5-2 8.5-1 9.5-.5"></path><path d="M7.5 14.5c5-2 8.5-1 9.5-.5"></path><path d="M7 17.5c5-2 8.5-1 9.5-.5"></path></svg></a>
+                    <a href="https://facebook.com/traditionalrecords" target="_blank" rel="noopener" class="hover-target" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                </div>
+            </div>
+            <div class="footer-col newsletter-col">
+                <h3>THE NEWSLETTER</h3>
+                <p>Join the inner circle.</p>
+                <form class="newsletter-form" aria-label="Nieuwsbrief aanmelding">
+                    <label for="newsletter-email-over" class="sr-only">E-mailadres</label>
+                    <input type="email" id="newsletter-email-over" placeholder="EMAIL ADDRESS" required autocomplete="email">
+                    <button type="submit" class="hover-target">SUBSCRIBE</button>
+                </form>
+            </div>
+            <div class="footer-col links-col">
+                <h3>VERKENNEN</h3>
+                <ul class="footer-links">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="merch.html" class="hover-target">Merch</a></li>
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="magazine.html" class="hover-target">Magazine</a></li>
+                    <li><a href="poku-lobi-club.html" class="hover-target">Poku Lobi Club</a></li>
+                    <li><a href="sync.html" class="hover-target">Sync & Licensing</a></li>
+                    <li><a href="contact.html" class="hover-target">Contact</a></li>
+                </ul>
+                <ul class="footer-links" style="margin-top: 15px;">
+                    <li><a href="faq.html" class="hover-target" style="font-size:12px; font-weight:400;">FAQ</a></li>
+                    <li><a href="privacy.html" class="hover-target" style="font-size:12px; font-weight:400;">Privacy & Voorwaarden</a></li>
+                </ul>
+                <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

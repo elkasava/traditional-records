@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Traditional Records Magazine - Verhalen over Surinaamse muziek, artiesteninterviews, studio sessions en cultuur.">
+    <title>MAGAZINE | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <style>
+        .magazine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .article-card {
+            background: var(--color-card);
+            border: 1px solid #1a1a1a;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .article-card:hover { border-color: #333; transform: translateY(-4px); }
+        .article-card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+        .article-card-body { padding: 24px; }
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .article-category {
+            font-size: 10px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-transform: uppercase;
+        }
+        .article-date {
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--color-muted);
+        }
+        .article-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--color-text);
+            margin: 0 0 12px;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+        .article-excerpt {
+            font-size: 13px;
+            color: var(--color-muted);
+            line-height: 1.7;
+            margin: 0 0 20px;
+        }
+        .article-read-more {
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--color-text);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--color-accent);
+            padding-bottom: 2px;
+            transition: color 0.2s;
+        }
+        .article-read-more:hover { color: var(--color-accent); }
+        .mag-filter-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .mag-filter-btn {
+            background: none;
+            border: 1px solid #2a2a2a;
+            color: var(--color-muted);
+            font-family: var(--font-main);
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            padding: 8px 16px;
+            cursor: none;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+        .mag-filter-btn:hover, .mag-filter-btn.active {
+            border-color: var(--color-text);
+            color: var(--color-text);
+        }
+        .article-card.hidden { display: none; }
+        .article-card.featured {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .article-card.featured .article-card-img { height: 100%; min-height: 300px; }
+        @media (max-width: 600px) {
+            .article-card.featured { grid-template-columns: 1fr; }
+            .article-card.featured .article-card-img { height: 220px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar scrolled" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target"><img src="logo.png" alt="Traditional Records Logo" width="50" height="50"></a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main-content" class="page-container">
+        <h1 class="section-title">MAGAZINE</h1>
+        <p style="text-align:center; color:var(--color-muted); font-size:15px; margin-bottom:40px; line-height:1.8;">Verhalen over Surinaamse muziek, artiesten en cultuur.</p>
+
+        <div class="mag-filter-bar" role="group" aria-label="Filter op categorie">
+            <button class="mag-filter-btn active hover-target" data-filter="all">ALLES</button>
+            <button class="mag-filter-btn hover-target" data-filter="geschiedenis">GESCHIEDENIS</button>
+            <button class="mag-filter-btn hover-target" data-filter="interview">INTERVIEW</button>
+            <button class="mag-filter-btn hover-target" data-filter="cultuur">CULTUUR</button>
+            <button class="mag-filter-btn hover-target" data-filter="studio">STUDIO</button>
+            <button class="mag-filter-btn hover-target" data-filter="playlists">PLAYLISTS</button>
+        </div>
+
+        <div class="magazine-grid" id="magazineGrid">
+
+            <article class="article-card featured reveal" data-category="geschiedenis">
+                <img src="first.jpg" alt="Kaseko live performance" class="article-card-img" loading="lazy">
+                <div class="article-card-body" style="display:flex; flex-direction:column; justify-content:center;">
+                    <div class="article-meta">
+                        <span class="article-category">Geschiedenis</span>
+                        <span class="article-date">12 Feb 2026</span>
+                    </div>
+                    <h2 class="article-title" style="font-size:26px;">De Geboorte van Kaseko</h2>
+                    <p class="article-excerpt">Kaseko — het kloppende hart van Surinaamse muziek. Hoe een genre ontstond uit de fusie van Creoolse tradities, Afrikaanse ritmes en Caribische invloeden, en waarom het tot op de dag van vandaag onweerstaanbaar blijft.</p>
+                    <a href="#" class="article-read-more hover-target">LEES MEER →</a>
+                </div>
+            </article>
+
+            <article class="article-card reveal" data-category="interview">
+                <img src="forth.jpg" alt="Studio opname sessie" class="article-card-img" loading="lazy">
+                <div class="article-card-body">
+                    <div class="article-meta">
+                        <span class="article-category">Interview</span>
+                        <span class="article-date">28 Jan 2026</span>
+                    </div>
+                    <h2 class="article-title">Producer Spotlight: De Sound van Paramaribo</h2>
+                    <p class="article-excerpt">Over samplen van kawina, analoge synthesizers en het bewaken van culturele authenticiteit in de moderne productiestudio.</p>
+                    <a href="#" class="article-read-more hover-target">LEES MEER →</a>
+                </div>
+            </article>
+
+            <article class="article-card reveal" data-category="cultuur">
+                <img src="second.jpg" alt="Vinyl muziekcollectie" class="article-card-img" loading="lazy">
+                <div class="article-card-body">
+                    <div class="article-meta">
+                        <span class="article-category">Cultuur</span>
+                        <span class="article-date">10 Jan 2026</span>
+                    </div>
+                    <h2 class="article-title">Vinyl Revival: Waarom Analoog Wint</h2>
+                    <p class="article-excerpt">Hoe het vinyl revival ook de Surinaamse muziekcultuur raakt, en wat Traditional Records doet om de collectie voor toekomstige generaties te bewaren.</p>
+                    <a href="#" class="article-read-more hover-target">LEES MEER →</a>
+                </div>
+            </article>
+
+            <article class="article-card reveal" data-category="studio">
+                <img src="thirth.jpg" alt="Live optreden" class="article-card-img" loading="lazy">
+                <div class="article-card-body">
+                    <div class="article-meta">
+                        <span class="article-category">Studio</span>
+                        <span class="article-date">5 Dec 2025</span>
+                    </div>
+                    <h2 class="article-title">Studio Sessions: Van Demo tot Plaat</h2>
+                    <p class="article-excerpt">We volgden drie artiesten door het complete opname- en mixproces in de Traditional Records studiomuren.</p>
+                    <a href="#" class="article-read-more hover-target">LEES MEER →</a>
+                </div>
+            </article>
+
+            <article class="article-card reveal" data-category="playlists">
+                <img src="fifth.jpg" alt="Vinyl collectie" class="article-card-img" loading="lazy">
+                <div class="article-card-body">
+                    <div class="article-meta">
+                        <span class="article-category">Playlists</span>
+                        <span class="article-date">20 Nov 2025</span>
+                    </div>
+                    <h2 class="article-title">De 25 Beste Surinaamse Platen Aller Tijden</h2>
+                    <p class="article-excerpt">Onze redactie selecteerde de 25 albums en singles die elke muziekliefhebber minimaal één keer gehoord moet hebben.</p>
+                    <a href="#" class="article-read-more hover-target">LEES MEER →</a>
+                </div>
+            </article>
+
+            <article class="article-card reveal" data-category="geschiedenis">
+                <div style="height:220px; background:#111; display:flex; align-items:center; justify-content:center;">
+                    <img src="logo.png" alt="Traditional Records" style="width:80px; height:80px; object-fit:contain; opacity:0.4;">
+                </div>
+                <div class="article-card-body">
+                    <div class="article-meta">
+                        <span class="article-category">Geschiedenis</span>
+                        <span class="article-date">8 Oct 2025</span>
+                    </div>
+                    <h2 class="article-title">Winti Muziek: Spiritualiteit in Klank</h2>
+                    <p class="article-excerpt">Hoe de Afro-Surinaamse spirituele traditie zijn weg vond naar de studio, en welke rituele elementen in moderne producties doorklinken.</p>
+                    <a href="#" class="article-read-more hover-target">LEES MEER →</a>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-col brand-col">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="120" height="120">
+                <address>TRADITIONAL RECORDS HQ<br>Waterkant 12, Paramaribo<br><a href="mailto:info@traditionalrecords.sr" class="hover-target">info@traditionalrecords.sr</a></address>
+            </div>
+            <div class="footer-col newsletter-col">
+                <h3>THE NEWSLETTER</h3>
+                <p>Join the inner circle.</p>
+                <form class="newsletter-form" aria-label="Nieuwsbrief aanmelding">
+                    <label for="newsletter-email-mag" class="sr-only">E-mailadres</label>
+                    <input type="email" id="newsletter-email-mag" placeholder="EMAIL ADDRESS" required autocomplete="email">
+                    <button type="submit" class="hover-target">SUBSCRIBE</button>
+                </form>
+            </div>
+            <div class="footer-col links-col">
+                <h3>VERKENNEN</h3>
+                <ul class="footer-links">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="merch.html" class="hover-target">Merch</a></li>
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="magazine.html" class="hover-target">Magazine</a></li>
+                    <li><a href="poku-lobi-club.html" class="hover-target">Poku Lobi Club</a></li>
+                    <li><a href="sync.html" class="hover-target">Sync & Licensing</a></li>
+                    <li><a href="contact.html" class="hover-target">Contact</a></li>
+                </ul>
+                <ul class="footer-links" style="margin-top: 15px;">
+                    <li><a href="faq.html" class="hover-target" style="font-size:12px; font-weight:400;">FAQ</a></li>
+                    <li><a href="privacy.html" class="hover-target" style="font-size:12px; font-weight:400;">Privacy & Voorwaarden</a></li>
+                </ul>
+                <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.querySelectorAll('.mag-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.mag-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            document.querySelectorAll('.article-card').forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>

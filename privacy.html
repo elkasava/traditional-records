@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy Policy en Algemene Voorwaarden van Traditional Records.">
+    <title>PRIVACY & VOORWAARDEN | TRADITIONAL RECORDS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <style>
+        .legal-hero {
+            background: #000;
+            padding: 160px 5% 60px;
+            border-bottom: 1px solid #1a1a1a;
+            text-align: center;
+        }
+        .legal-hero h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 800;
+            color: #fff;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .legal-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            border-bottom: 1px solid #1a1a1a;
+            background: #050505;
+            position: sticky;
+            top: 60px;
+            z-index: 50;
+        }
+        .legal-nav-btn {
+            background: none;
+            border: none;
+            color: #555;
+            font-family: var(--font-main);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 18px 30px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .legal-nav-btn:hover { color: #fff; }
+        .legal-nav-btn.active {
+            color: #fff;
+            border-bottom-color: var(--color-accent);
+        }
+
+        .legal-content {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 60px 5% 100px;
+        }
+        .legal-section {
+            display: none;
+        }
+        .legal-section.active {
+            display: block;
+        }
+        .legal-section h2 {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin: 50px 0 20px;
+        }
+        .legal-section h2:first-child {
+            margin-top: 0;
+        }
+        .legal-section p,
+        .legal-section li {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 15px;
+        }
+        .legal-section ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        .legal-section li {
+            margin-bottom: 8px;
+        }
+        .legal-section a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        .legal-section a:hover {
+            text-decoration: underline;
+        }
+        .legal-date {
+            color: #444;
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ga naar inhoud</a>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+
+    <nav class="navbar scrolled" aria-label="Hoofdnavigatie">
+        <div class="logo">
+            <a href="index.html" aria-label="Traditional Records - Home" class="hover-target"><img src="logo.png" alt="Traditional Records Logo" width="50" height="50"></a>
+        </div>
+        <button class="hamburger hover-target" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+        <div class="nav-pill-center" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="artiesten.html" class="hover-target">ARTIESTEN</a></li>
+                <li><a href="releases.html" class="hover-target">RELEASES</a></li>
+                <li><a href="merch.html" class="hover-target">MERCH</a></li>
+                <li><a href="shop.html" class="hover-target">SHOP</a></li>
+                <li><a href="sync.html" class="hover-target">SYNC & LICENSING</a></li>
+                <li><a href="poku-lobi-club.html" class="hover-target" style="color:var(--color-accent);">POKU LOBI CLUB</a></li>
+                <li><a href="over.html" class="hover-target">OVER ONS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <div class="legal-hero">
+            <h1>PRIVACY & VOORWAARDEN</h1>
+        </div>
+
+        <div class="legal-nav" role="tablist">
+            <button class="legal-nav-btn active hover-target" data-tab="privacy" role="tab" type="button">PRIVACYBELEID</button>
+            <button class="legal-nav-btn hover-target" data-tab="terms" role="tab" type="button">ALGEMENE VOORWAARDEN</button>
+            <button class="legal-nav-btn hover-target" data-tab="shipping" role="tab" type="button">VERZENDING & RETOUR</button>
+        </div>
+
+        <div class="legal-content">
+
+            <div class="legal-section active" id="tab-privacy">
+                <p class="legal-date">Laatst bijgewerkt: 1 januari 2026</p>
+
+                <h2>VERZAMELING VAN GEGEVENS</h2>
+                <p>Traditional Records verzamelt persoonlijke gegevens wanneer u een bestelling plaatst, zich aanmeldt voor onze nieuwsbrief, of contact met ons opneemt. Dit omvat:</p>
+                <ul>
+                    <li>Naam en contactgegevens (e-mailadres, telefoonnummer)</li>
+                    <li>Bezorg- en factuuradressen</li>
+                    <li>Bestel- en betalingsgegevens</li>
+                    <li>Communicatievoorkeuren</li>
+                </ul>
+
+                <h2>GEBRUIK VAN GEGEVENS</h2>
+                <p>Wij gebruiken uw gegevens uitsluitend voor:</p>
+                <ul>
+                    <li>Het verwerken en bezorgen van uw bestellingen</li>
+                    <li>Het versturen van bestelbevestigingen en track & trace informatie</li>
+                    <li>Het beantwoorden van uw vragen en verzoeken</li>
+                    <li>Het versturen van onze nieuwsbrief (alleen met uw toestemming)</li>
+                    <li>Het verbeteren van onze website en dienstverlening</li>
+                </ul>
+
+                <h2>BEVEILIGING</h2>
+                <p>Wij nemen passende technische en organisatorische maatregelen om uw persoonlijke gegevens te beschermen tegen ongeautoriseerde toegang, verlies of misbruik. Betalingen worden verwerkt via beveiligde, PCI-gecertificeerde betaalproviders.</p>
+
+                <h2>COOKIES</h2>
+                <p>Onze website gebruikt functionele cookies voor het winkelwagentje en uw browse-ervaring. Wij gebruiken geen tracking cookies van derden zonder uw toestemming.</p>
+
+                <h2>UW RECHTEN</h2>
+                <p>U heeft het recht om uw persoonlijke gegevens in te zien, te corrigeren of te laten verwijderen. Neem hiervoor contact op via <a href="mailto:privacy@traditionalrecords.sr">privacy@traditionalrecords.sr</a>.</p>
+            </div>
+
+            <div class="legal-section" id="tab-terms">
+                <p class="legal-date">Laatst bijgewerkt: 1 januari 2026</p>
+
+                <h2>ALGEMEEN</h2>
+                <p>Deze voorwaarden zijn van toepassing op alle aanbiedingen, bestellingen en overeenkomsten van Traditional Records, gevestigd aan de Waterkant 12, Paramaribo, Suriname.</p>
+
+                <h2>BESTELLINGEN</h2>
+                <p>Een bestelling komt tot stand op het moment dat u de bestelprocedure voltooit en de betaling is ontvangen. U ontvangt een bevestiging per e-mail. Traditional Records behoudt zich het recht voor om bestellingen te weigeren bij gegronde redenen.</p>
+
+                <h2>PRIJZEN</h2>
+                <p>Alle prijzen op de website zijn in euro's en inclusief BTW. Verzendkosten worden apart vermeld bij het afrekenen. Prijzen kunnen zonder voorafgaande kennisgeving worden gewijzigd, maar reeds geplaatste bestellingen worden niet be&iuml;nvloed.</p>
+
+                <h2>INTELLECTUEEL EIGENDOM</h2>
+                <p>Alle content op deze website, inclusief maar niet beperkt tot tekst, afbeeldingen, logo's, artwork en muziek, is eigendom van Traditional Records of haar licentiegevers en wordt beschermd door auteurs- en merkenrecht. Gebruik zonder schriftelijke toestemming is niet toegestaan.</p>
+
+                <h2>AANSPRAKELIJKHEID</h2>
+                <p>Traditional Records is niet aansprakelijk voor indirecte schade, gevolgschade of gederfde winst. Onze maximale aansprakelijkheid is beperkt tot het bedrag van de betreffende bestelling.</p>
+
+                <h2>TOEPASSELIJK RECHT</h2>
+                <p>Op alle overeenkomsten is Nederlands recht van toepassing. Geschillen worden voorgelegd aan de bevoegde rechter in Amsterdam.</p>
+            </div>
+
+            <div class="legal-section" id="tab-shipping">
+                <p class="legal-date">Laatst bijgewerkt: 1 januari 2026</p>
+
+                <h2>VERZENDKOSTEN</h2>
+                <ul>
+                    <li><strong>Nederland:</strong> &euro;4,95 (gratis bij bestellingen boven &euro;50)</li>
+                    <li><strong>Belgi&euml; & Duitsland:</strong> &euro;7,95</li>
+                    <li><strong>Overig Europa:</strong> &euro;9,95</li>
+                    <li><strong>Wereldwijd:</strong> &euro;14,95</li>
+                </ul>
+
+                <h2>LEVERTIJDEN</h2>
+                <ul>
+                    <li><strong>Nederland:</strong> 2-4 werkdagen</li>
+                    <li><strong>Europa:</strong> 5-10 werkdagen</li>
+                    <li><strong>Wereldwijd:</strong> 10-21 werkdagen</li>
+                </ul>
+                <p>Pre-orders worden verzonden zodra het product beschikbaar is. U ontvangt hiervan een e-mailnotificatie.</p>
+
+                <h2>VERPAKKING</h2>
+                <p>Vinyl wordt verzonden in speciale LP-mailers met extra bescherming. CD's en cassettes worden verpakt in stevige verzenddozen. Wij gebruiken waar mogelijk duurzaam verpakkingsmateriaal.</p>
+
+                <h2>RETOURNEREN</h2>
+                <p>U heeft 14 dagen bedenktijd na ontvangst van uw bestelling. Voorwaarden:</p>
+                <ul>
+                    <li>Het product moet onbeschadigd en in originele verpakking zijn</li>
+                    <li>Geopende vinyl/CD kan alleen worden geretourneerd bij een productdefect</li>
+                    <li>Retourkosten zijn voor rekening van de koper, tenzij het product defect is</li>
+                    <li>Terugbetaling vindt plaats binnen 14 dagen na ontvangst van het geretourneerde product</li>
+                </ul>
+                <p>Neem voor retourzendingen contact op via <a href="mailto:support@traditionalrecords.sr">support@traditionalrecords.sr</a>.</p>
+
+                <h2>BESCHADIGDE PRODUCTEN</h2>
+                <p>Heeft u een beschadigd product ontvangen? Neem binnen 48 uur contact op met foto's van de schade. Wij zorgen kosteloos voor een vervanging of volledige terugbetaling.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-col brand-col">
+                <img src="logo.png" alt="Traditional Records" class="footer-logo" width="120" height="120">
+                <address>TRADITIONAL RECORDS HQ<br>Waterkant 12, Paramaribo<br><a href="mailto:info@traditionalrecords.sr" class="hover-target">info@traditionalrecords.sr</a></address>
+                <div class="social-icons">
+                    <a href="https://instagram.com/traditionalrecords" target="_blank" rel="noopener" class="hover-target" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://open.spotify.com/search/Traditional%20Records%20Suriname" target="_blank" rel="noopener" class="hover-target" aria-label="Spotify"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M8 11.5c5-2 8.5-1 9.5-.5"></path><path d="M7.5 14.5c5-2 8.5-1 9.5-.5"></path><path d="M7 17.5c5-2 8.5-1 9.5-.5"></path></svg></a>
+                    <a href="https://facebook.com/traditionalrecords" target="_blank" rel="noopener" class="hover-target" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                </div>
+            </div>
+            <div class="footer-col newsletter-col">
+                <h3>THE NEWSLETTER</h3>
+                <p>Join the inner circle.</p>
+                <form class="newsletter-form" aria-label="Nieuwsbrief aanmelding">
+                    <label for="newsletter-email-privacy" class="sr-only">E-mailadres</label>
+                    <input type="email" id="newsletter-email-privacy" placeholder="EMAIL ADDRESS" required autocomplete="email">
+                    <button type="submit" class="hover-target">SUBSCRIBE</button>
+                </form>
+            </div>
+            <div class="footer-col links-col">
+                <h3>VERKENNEN</h3>
+                <ul class="footer-links">
+                    <li><a href="artiesten.html" class="hover-target">Artiesten</a></li>
+                    <li><a href="releases.html" class="hover-target">Releases</a></li>
+                    <li><a href="merch.html" class="hover-target">Merch</a></li>
+                    <li><a href="shop.html" class="hover-target">Shop</a></li>
+                    <li><a href="magazine.html" class="hover-target">Magazine</a></li>
+                    <li><a href="poku-lobi-club.html" class="hover-target">Poku Lobi Club</a></li>
+                    <li><a href="sync.html" class="hover-target">Sync & Licensing</a></li>
+                    <li><a href="contact.html" class="hover-target">Contact</a></li>
+                </ul>
+                <ul class="footer-links" style="margin-top: 15px;">
+                    <li><a href="faq.html" class="hover-target" style="font-size:12px; font-weight:400;">FAQ</a></li>
+                    <li><a href="privacy.html" class="hover-target" style="font-size:12px; font-weight:400;">Privacy & Voorwaarden</a></li>
+                </ul>
+                <div class="copyright-text">&copy; 2026 TRADITIONAL RECORDS. Alle rechten voorbehouden.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.querySelectorAll('.legal-nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.legal-nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.legal-section').forEach(s => s.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab)?.classList.add('active');
+        });
+    });
+    </script>
+</body>
+</html>
