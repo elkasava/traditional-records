@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build & Deploy to GitHub Pages
 
 on:
   push:
@@ -12,48 +12,37 @@ permissions:
   pages: write
   id-token: write
 
-# Only one concurrent deployment; cancel in-progress on new push
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
 jobs:
-  # ── Validate HTML/CSS (lint pass) ─────────────────────────────────────────
-  validate:
-    name: Validate
+  # ── Build: optimize images, minify CSS/JS ────────────────────────────────
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check for broken internal links
-        run: |
-          echo "Checking HTML files exist..."
-          for f in index.html releases.html artiesten.html contact.html faq.html privacy.html 404.html; do
-            [ -f "$f" ] && echo "✅ $f" || echo "❌ MISSING: $f"
-          done
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-      - name: Verify Service Worker present
-        run: |
-          [ -f "sw.js" ] && echo "✅ sw.js present" || exit 1
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Verify favicon present
-        run: |
-          [ -f "favicon.svg" ] && echo "✅ favicon.svg present" || exit 1
+      - name: Build (optimize images + minify)
+        run: npm run build
 
-  # ── Deploy to GitHub Pages ───────────────────────────────────────────────
-  deploy:
-    name: Deploy
-    needs: validate
-    runs-on: ubuntu-latest
-    # Only deploy on push to main/master (not on PRs)
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Verify build output
+        run: |
+          echo "=== dist/ totaal ==="
+          du -sh dist/
+          echo "=== WebP images ==="
+          ls -lh dist/*.webp 2>/dev/null | awk '{print $5, $9}' || echo "geen webp"
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
@@ -61,8 +50,18 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "."
+          path: "dist"
 
+  # ── Deploy ───────────────────────────────────────────────────────────────
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

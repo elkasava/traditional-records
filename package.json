@@ -1,0 +1,16 @@
+{
+  "name": "traditional-records",
+  "version": "1.0.0",
+  "description": "Traditional Records — Surinaamse Heritage Muziek",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "npx serve .",
+    "preview": "npx serve dist"
+  },
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "sharp": "^0.33.5",
+    "terser": "^5.36.0"
+  }
+}
